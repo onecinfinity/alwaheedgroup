@@ -16,7 +16,7 @@ const years = new Date().getFullYear() - site.foundingYear;
 const check = (t) => `<li>${icon('check', '', 18)}<span>${t}</span></li>`;
 const rs = (n) => n.toLocaleString('en-US');
 const fileSize = (p) => {
-  try { return `${Math.round(fs.statSync(new URL(`../public${p}`, import.meta.url)).size / 1024)} KB`; } catch { return ''; }
+  try { return `${Math.round(fs.statSync(new URL(`../..${p}`, import.meta.url)).size / 1024)} KB`; } catch { return ''; }
 };
 
 function consultSection({ id = 'book', title = 'Talk to a Property Advisor', level = 2 } = {}) {

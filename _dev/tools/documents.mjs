@@ -1,5 +1,5 @@
-// Builds the downloadable PDFs for United Palm Greens into public/downloads/.
-// Usage: node tools/documents.mjs   (needs Google Chrome or Microsoft Edge, and Python with PyMuPDF + Pillow)
+// Builds the downloadable PDFs into downloads/ at the site root.
+// Usage (from the repository root): node _dev/tools/documents.mjs   (needs Google Chrome or Microsoft Edge, and Python with PyMuPDF + Pillow)
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
@@ -7,8 +7,8 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { site, paymentPlan as plan, downloads } from '../src/data.mjs';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PUB = path.join(ROOT, 'public');
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'); // the _dev folder
+const PUB = path.resolve(ROOT, '..'); // repository root, deployed as public_html
 const TMP = fs.mkdtempSync(path.join(os.tmpdir(), 'aw-docs-'));
 const asset = (p) => pathToFileURL(path.join(PUB, p)).href;
 const rs = (n) => n.toLocaleString('en-US');

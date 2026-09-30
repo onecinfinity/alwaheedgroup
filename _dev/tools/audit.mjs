@@ -1,14 +1,15 @@
 // Checks the built site: one h1 per page, unique titles and descriptions, alt text,
 // internal links and image files, JSON-LD syntax, duplicate ids and in-page anchors.
-// Usage: node tools/audit.mjs
+// Usage (from the repository root): node _dev/tools/audit.mjs
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 
-const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'public');
+const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+const SKIP = new Set(['_dev', '.git', '.claude', '.github', 'node_modules']);
 const files = [];
-(function walk(d) { for (const f of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, f.name); if (f.isDirectory()) walk(p); else if (f.name.endsWith('.html')) files.push(p); } })(OUT);
+(function walk(d) { for (const f of fs.readdirSync(d, { withFileTypes: true })) { const p = path.join(d, f.name); if (f.isDirectory()) { if (!(d === OUT && SKIP.has(f.name))) walk(p); } else if (f.name.endsWith('.html')) files.push(p); } })(OUT);
 const titles = new Map();
 const descs = new Map();
 const problems = [];

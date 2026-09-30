@@ -1,11 +1,11 @@
 """Optimise client images for the web and write src/images.json.
 
-Writes responsive AVIF and WebP files to public/assets/img/, plus art directed
+Writes responsive AVIF and WebP files to assets/img/ at the site root, plus art directed
 phone crops, blurred teaser images, logos cut from the layout plan, leadership
 portraits, Open Graph share images and the favicon set.
 
-Usage (from the project root):
-    python tools/images.py
+Usage (from the repository root):
+    python _dev/tools/images.py
 Requires: Pillow 11+ (AVIF support), PyMuPDF, NumPy and OpenCV (opencv-python).
 """
 import json
@@ -19,10 +19,11 @@ from PIL import Image, ImageDraw, ImageFilter
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import portraits  # noqa: E402
 
-ROOT = pathlib.Path(__file__).resolve().parent.parent
+ROOT = pathlib.Path(__file__).resolve().parent.parent  # the _dev folder
+SITE = ROOT.parent  # repository root, deployed as public_html
 SRC = ROOT / 'assets' / 'images'
 BRAND = ROOT / 'assets' / 'brand'
-OUT = ROOT / 'public' / 'assets' / 'img'
+OUT = SITE / 'assets' / 'img'
 LOGO_PDF = BRAND / 'al-waheed-logo.pdf'
 MAP = SRC / 'united-palm-green' / 'Upg final map.jpg.jpeg'
 MANIFEST = ROOT / 'src' / 'images.json'
@@ -253,13 +254,13 @@ def og_images(sources):
 def favicons():
     brand = OUT / 'brand'
     emblem = logo_raster(0, 512, clip=(174, 96, 686, 608))
-    emblem.save(ROOT / 'public' / 'favicon.ico', sizes=[(16, 16), (32, 32), (48, 48)])
+    emblem.save(SITE / 'favicon.ico', sizes=[(16, 16), (32, 32), (48, 48)])
     for size, name in [(180, 'apple-touch-icon.png'), (192, 'icon-192.png'), (512, 'icon-512.png')]:
         bg = Image.new('RGBA', (size, size), (250, 247, 241, 255))
         inner = round(size * 0.78)
         e = emblem.resize((inner, inner), Image.LANCZOS)
         bg.paste(e, ((size - inner) // 2, (size - inner) // 2), e)
-        target = ROOT / 'public' / name if name == 'apple-touch-icon.png' else brand / name
+        target = SITE / name if name == 'apple-touch-icon.png' else brand / name
         bg.convert('RGB').save(target, optimize=True)
     print('favicons ok')
 
