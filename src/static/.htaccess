@@ -6,12 +6,14 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # One main address: https://alwaheedgroup.com (must match site.url in src/data.mjs).
+  # The second domain and both www versions go there in a single permanent redirect, keeping the page path.
+  RewriteCond %{HTTP_HOST} ^(www\.)?alwaheedgroupofcompanies\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.alwaheedgroup\.com$ [NC]
+  RewriteRule ^ https://alwaheedgroup.com%{REQUEST_URI} [L,R=301]
   # Always use HTTPS
   RewriteCond %{HTTPS} !=on
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-  # Once the real domain is live, uncomment to force the www version (it must match site.url in src/data.mjs)
-  # RewriteCond %{HTTP_HOST} !^www\. [NC]
-  # RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   # /index.html to /
   RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
   RewriteRule ^(.*/)?index\.html$ /$1 [L,R=301]

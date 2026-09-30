@@ -9,15 +9,16 @@ export const site = {
   name: 'Al Waheed Group of Companies',
   shortName: 'Al Waheed Group',
   brand: 'Al Waheed',
-  url: 'https://www.alwaheedgroupofcompanies.com', // PLACEHOLDER domain
+  // Main domain. alwaheedgroupofcompanies.com and both www versions redirect here (src/static/.htaccess).
+  url: 'https://alwaheedgroup.com',
   tagline: 'Building Better Lives',
   foundingYear: 2016,
   phone: '+92 306 0005559',
   phoneHref: '+923060005559',
   whatsapp: '923060005559',
   whatsappText: 'Hi Al Waheed Group, I would like to know more about your projects.',
-  email: 'info@alwaheedgroupofcompanies.com', // PLACEHOLDER
-  careersEmail: 'careers@alwaheedgroupofcompanies.com', // PLACEHOLDER
+  email: 'info@alwaheedgroup.com', // PLACEHOLDER: create this mailbox or replace it
+  careersEmail: 'careers@alwaheedgroup.com', // PLACEHOLDER: create this mailbox or replace it
   address: {
     street: 'Main 400 White Road, Sector 6, Surjani Town',
     city: 'Karachi',
