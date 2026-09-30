@@ -1,0 +1,433 @@
+{
+ "united-palm-greens/main": {
+  "src": "/assets/img/united-palm-greens/main",
+  "w": 1536,
+  "h": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "united-palm-greens/model": {
+  "src": "/assets/img/united-palm-greens/model",
+  "w": 1402,
+  "h": 1122,
+  "widths": [
+   480,
+   800,
+   1200,
+   1402
+  ]
+ },
+ "united-palm-greens/sports": {
+  "src": "/assets/img/united-palm-greens/sports",
+  "w": 1280,
+  "h": 596,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r1": {
+  "src": "/assets/img/united-palm-greens/r1",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r2": {
+  "src": "/assets/img/united-palm-greens/r2",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r3": {
+  "src": "/assets/img/united-palm-greens/r3",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r4": {
+  "src": "/assets/img/united-palm-greens/r4",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r5": {
+  "src": "/assets/img/united-palm-greens/r5",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r6": {
+  "src": "/assets/img/united-palm-greens/r6",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r7": {
+  "src": "/assets/img/united-palm-greens/r7",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r8": {
+  "src": "/assets/img/united-palm-greens/r8",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r9": {
+  "src": "/assets/img/united-palm-greens/r9",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r10": {
+  "src": "/assets/img/united-palm-greens/r10",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "united-palm-greens/r11": {
+  "src": "/assets/img/united-palm-greens/r11",
+  "w": 1280,
+  "h": 720,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "brand/logo-in-wall": {
+  "src": "/assets/img/brand/logo-in-wall",
+  "w": 1536,
+  "h": 1024,
+  "widths": [
+   480,
+   800,
+   1200,
+   1536
+  ]
+ },
+ "khairunnisa-heights/aerial-day": {
+  "src": "/assets/img/khairunnisa-heights/aerial-day",
+  "w": 1280,
+  "h": 853,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "khairunnisa-heights/aerial-sunset": {
+  "src": "/assets/img/khairunnisa-heights/aerial-sunset",
+  "w": 887,
+  "h": 1024,
+  "widths": [
+   480,
+   800,
+   887
+  ]
+ },
+ "khairunnisa-heights/tower-day": {
+  "src": "/assets/img/khairunnisa-heights/tower-day",
+  "w": 1280,
+  "h": 1067,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "khairunnisa-heights/collage": {
+  "src": "/assets/img/khairunnisa-heights/collage",
+  "w": 1280,
+  "h": 853,
+  "widths": [
+   480,
+   800,
+   1200,
+   1280
+  ]
+ },
+ "khairunnisa-heights/floor-plan-ruby": {
+  "src": "/assets/img/khairunnisa-heights/floor-plan-ruby",
+  "w": 1078,
+  "h": 1459,
+  "widths": [
+   480,
+   800,
+   1078
+  ]
+ },
+ "khairunnisa-heights/floor-plan-opal": {
+  "src": "/assets/img/khairunnisa-heights/floor-plan-opal",
+  "w": 1108,
+  "h": 1420,
+  "widths": [
+   480,
+   800,
+   1108
+  ]
+ },
+ "khairunnisa-heights/floor-plan-diamond": {
+  "src": "/assets/img/khairunnisa-heights/floor-plan-diamond",
+  "w": 1198,
+  "h": 1313,
+  "widths": [
+   480,
+   800,
+   1198
+  ]
+ },
+ "united-palm-greens/r5-tall": {
+  "src": "/assets/img/united-palm-greens/r5-tall",
+  "w": 576,
+  "h": 720,
+  "widths": [
+   480,
+   576
+  ]
+ },
+ "khairunnisa-heights/sunset-tower": {
+  "src": "/assets/img/khairunnisa-heights/sunset-tower",
+  "w": 538,
+  "h": 853,
+  "widths": [
+   538
+  ]
+ },
+ "khairunnisa-heights/dusk-tower": {
+  "src": "/assets/img/khairunnisa-heights/dusk-tower",
+  "w": 340,
+  "h": 418,
+  "widths": [
+   340
+  ]
+ },
+ "khairunnisa-heights/tower-angle": {
+  "src": "/assets/img/khairunnisa-heights/tower-angle",
+  "w": 384,
+  "h": 418,
+  "widths": [
+   384
+  ]
+ },
+ "united-palm-greens/main-p": {
+  "src": "/assets/img/united-palm-greens/main-p",
+  "w": 683,
+  "h": 1024,
+  "widths": [
+   480,
+   683
+  ]
+ },
+ "united-palm-greens/r5-p": {
+  "src": "/assets/img/united-palm-greens/r5-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r6-p": {
+  "src": "/assets/img/united-palm-greens/r6-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r1-p": {
+  "src": "/assets/img/united-palm-greens/r1-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r2-p": {
+  "src": "/assets/img/united-palm-greens/r2-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r3-p": {
+  "src": "/assets/img/united-palm-greens/r3-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r4-p": {
+  "src": "/assets/img/united-palm-greens/r4-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r7-p": {
+  "src": "/assets/img/united-palm-greens/r7-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r8-p": {
+  "src": "/assets/img/united-palm-greens/r8-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/r10-p": {
+  "src": "/assets/img/united-palm-greens/r10-p",
+  "w": 480,
+  "h": 720,
+  "widths": [
+   480
+  ]
+ },
+ "khairunnisa-heights/aerial-day-p": {
+  "src": "/assets/img/khairunnisa-heights/aerial-day-p",
+  "w": 569,
+  "h": 853,
+  "widths": [
+   480,
+   569
+  ]
+ },
+ "khairunnisa-heights/tower-day-p": {
+  "src": "/assets/img/khairunnisa-heights/tower-day-p",
+  "w": 711,
+  "h": 1067,
+  "widths": [
+   480,
+   711
+  ]
+ },
+ "soon/united-sky-view": {
+  "src": "/assets/img/soon/united-sky-view",
+  "w": 480,
+  "h": 360,
+  "widths": [
+   480
+  ]
+ },
+ "soon/united-greens": {
+  "src": "/assets/img/soon/united-greens",
+  "w": 480,
+  "h": 360,
+  "widths": [
+   480
+  ]
+ },
+ "soon/united-lodges": {
+  "src": "/assets/img/soon/united-lodges",
+  "w": 480,
+  "h": 360,
+  "widths": [
+   480
+  ]
+ },
+ "united-palm-greens/layout-plan": {
+  "src": "/assets/img/united-palm-greens/layout-plan",
+  "w": 2560,
+  "h": 1694,
+  "widths": [
+   800,
+   1600,
+   2560
+  ]
+ },
+ "team/abdul-waheed-meo": {
+  "src": "/assets/img/team/abdul-waheed-meo",
+  "w": 720,
+  "h": 800,
+  "widths": [
+   360,
+   720
+  ]
+ },
+ "team/muhammad-saeed-meo": {
+  "src": "/assets/img/team/muhammad-saeed-meo",
+  "w": 720,
+  "h": 800,
+  "widths": [
+   360,
+   720
+  ]
+ },
+ "team/babar-majeed-meo": {
+  "src": "/assets/img/team/babar-majeed-meo",
+  "w": 720,
+  "h": 800,
+  "widths": [
+   360,
+   720
+  ]
+ }
+}
