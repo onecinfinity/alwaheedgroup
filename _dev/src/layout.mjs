@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { site, companies, projects, upcoming } from './data.mjs';
+import { site, companies, dealerships, projects, upcoming } from './data.mjs';
 import { icon } from './icons.mjs';
 
 const manifest = JSON.parse(fs.readFileSync(new URL('./images.json', import.meta.url), 'utf8'));
@@ -63,7 +63,7 @@ export const nav = [
       { href: '/board-of-directors/', label: 'Board of Directors' },
     ],
   },
-  { href: '/our-companies/', label: 'Our Companies' },
+  { href: '/affiliated-groups/', label: 'Affiliated Groups' },
   {
     href: '/projects/', label: 'Projects',
     children: [
@@ -125,8 +125,8 @@ function footer() {
 <ul><li><a href="/">Home</a></li><li><a href="/about/">About Us</a></li><li><a href="/chairman-message/">Chairman's Message</a></li><li><a href="/board-of-directors/">Board of Directors</a></li><li><a href="/careers/">Careers</a></li><li><a href="/contact/">Contact</a></li></ul>
 </div>
 <div class="footer__col">
-<h2 class="footer__h">Our Companies</h2>
-<ul>${companies.map((c) => `<li><a href="/our-companies/#${c.id}">${c.name}</a></li>`).join('')}</ul>
+<h2 class="footer__h">Affiliated Groups</h2>
+<ul>${companies.map((c) => `<li><a href="/affiliated-groups/#${c.id}">${c.name}</a></li>`).join('')}</ul>
 </div>
 <div class="footer__col">
 <h2 class="footer__h">Projects</h2>
@@ -191,19 +191,26 @@ export function companyMark(c) {
     case 'emblem': return `<img class="mark__img" src="/assets/img/brand/logo-emblem.svg" width="64" height="64" alt="" loading="lazy">`;
     case 'hk': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/hk-builders-logo.webp" width="440" height="153" alt="" loading="lazy">`;
     case 'umg': return `<img class="mark__logo" src="/assets/img/brand/umg-logo.webp" width="193" height="180" alt="" loading="lazy">`;
-    case 'meraghar': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/mera-ghar-logo.webp" width="225" height="268" alt="" loading="lazy">`;
-    case 'falaknaz': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/falaknaz-logo.webp" width="350" height="244" alt="" loading="lazy">`;
-    default: return `<span class="mark mark--icon" aria-hidden="true">${icon('building', '', 52)}</span>`;
+    case 'alghaffar': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/al-ghaffar-logo.webp" width="500" height="400" alt="" loading="lazy">`;
+    default: return `<span class="mark mark--mono" aria-hidden="true">${c.name.split(' ').filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('')}</span>`;
   }
 }
 
 export function companyCard(c, level = 3) {
-  return `<a class="company-card" href="/our-companies/#${c.id}" data-reveal>
+  return `<a class="company-card" href="/affiliated-groups/#${c.id}" data-reveal>
 <span class="company-card__mark">${companyMark(c)}</span>
 <h${level} class="company-card__name">${c.name}</h${level}>
 <span class="company-card__rule" aria-hidden="true"></span>
 <p class="company-card__sector">${c.sector}</p>
 </a>`;
+}
+
+/** "Authorized dealer" cards: developers Al Waheed represents. */
+export function dealerCards(level = 3) {
+  return `<div class="dealers" data-stagger>${dealerships.map((d) => `<article class="dealer" id="${d.id}" data-reveal>
+<div class="dealer__mark">${d.logo ? `<img src="${d.logo[0]}" width="${d.logo[1]}" height="${d.logo[2]}" alt="" loading="lazy">` : `<span class="dealer__word" aria-hidden="true">${d.name.split(' ').slice(0, 2).join(' ')}</span>`}</div>
+<div class="dealer__body"><p class="eyebrow">Authorized Dealer &middot; ${d.period}</p><h${level} class="h3">${d.name}</h${level}><p>${d.text}</p></div>
+</article>`).join('')}</div>`;
 }
 
 /** Team photo (an images.json key such as 'team/abdul-waheed-meo'), or a monogram placeholder. */
@@ -343,7 +350,7 @@ const WEBSITE = `${site.url}/#website`;
 
 export function postalAddress(street = site.address.street) {
   const a = site.address;
-  return { '@type': 'PostalAddress', streetAddress: street, addressLocality: a.city, addressRegion: a.region, postalCode: a.postal, addressCountry: a.country };
+  return { '@type': 'PostalAddress', streetAddress: street, addressLocality: a.city, addressRegion: a.region, addressCountry: a.country };
 }
 
 function baseGraph() {
@@ -351,10 +358,9 @@ function baseGraph() {
     '@type': 'Organization', '@id': ORG, name: site.name, alternateName: [site.shortName, site.brand], url: site.url + '/',
     logo: { '@type': 'ImageObject', url: abs('/assets/img/brand/icon-512.png'), width: 512, height: 512 },
     image: abs('/assets/img/og/home.jpg'), email: site.email, telephone: site.phone, foundingDate: String(site.foundingYear),
-    address: postalAddress(),
+    address: postalAddress(`${site.address.street}, ${site.address.detail}`),
     contactPoint: { '@type': 'ContactPoint', telephone: site.phone, contactType: 'sales', areaServed: 'PK', availableLanguage: ['en', 'ur'] },
-    subOrganization: companies.filter((c) => !['falaknaz', 'other-ventures'].includes(c.id))
-      .map((c) => ({ '@type': 'Organization', name: c.name, ...(c.url ? { url: c.url } : {}) })),
+    subOrganization: companies.filter((c) => c.sub).map((c) => ({ '@type': 'Organization', name: c.name })),
   };
   if (site.socialIsReal) org.sameAs = Object.values(site.social).filter(Boolean);
   return [org, { '@type': 'WebSite', '@id': WEBSITE, url: site.url + '/', name: site.name, publisher: { '@id': ORG }, inLanguage: 'en-PK' }];
@@ -364,9 +370,9 @@ export function businessNode() {
   return {
     '@type': ['RealEstateAgent', 'HomeAndConstructionBusiness'], '@id': `${site.url}/#business`, name: site.name,
     url: site.url + '/', image: abs('/assets/img/og/home.jpg'), logo: abs('/assets/img/brand/icon-512.png'),
-    telephone: site.phone, email: site.email, priceRange: 'PKR', address: postalAddress(),
+    telephone: site.phone, email: site.email, priceRange: 'PKR', address: postalAddress(`${site.address.street}, ${site.address.detail}`),
     geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
-    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: site.hours[0].open, closes: site.hours[0].close }],
+    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: site.hours[0].dayOfWeek, opens: site.hours[0].open, closes: site.hours[0].close }],
     areaServed: { '@type': 'City', name: 'Karachi' }, parentOrganization: { '@id': ORG },
   };
 }

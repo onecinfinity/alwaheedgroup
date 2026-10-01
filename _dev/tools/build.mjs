@@ -7,7 +7,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { allPages } from '../src/pages.mjs';
 import { renderPage, abs, TODAY } from '../src/layout.mjs';
-import { site, projects, upcoming, chairman, board, downloads } from '../src/data.mjs';
+import { site, projects, upcoming, chairman, board, downloads, companies, dealerships } from '../src/data.mjs';
 
 const DEV = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(DEV, '..');
@@ -82,7 +82,7 @@ write('llms.txt', `# ${site.name}
 - [About](${abs('/about/')}): company story, milestones, vision, mission and values
 - [Chairman's Message](${abs('/chairman-message/')}): ${chairman.name}, ${chairman.title}
 - [Board of Directors](${abs('/board-of-directors/')}): ${board.map((b) => `${b.name} (${b.title})`).join(', ')}
-- [Our Companies](${abs('/our-companies/')}): group companies and what each one does
+- [Affiliated Groups](${abs('/affiliated-groups/')}): ${companies.map((c) => c.name).join(', ')}; authorized dealer for ${dealerships.map((d) => d.name).join(' and ')}
 - [Projects](${abs('/projects/')}): ${projects.map((p) => p.name).join(', ')}, and upcoming ${upcoming.map((u) => u.name).join(', ')}
 ${projects.map((p) => `- [${p.name}](${abs(`/projects/${p.slug}/`)}): ${p.type}, ${p.role.toLowerCase()}, in ${p.location}. ${p.plots ? `Plots: ${p.plots}` : `Units: ${p.units.map((u) => `${u.name} (${u.rooms}, Rs. ${u.total.toLocaleString('en-US')})`).join(', ')}`}. Payment: ${p.payment}.`).join('\n')}
 - [${downloads.paymentSchedule.title} (PDF)](${abs(downloads.paymentSchedule.file)}): United Palm Greens, ${downloads.paymentSchedule.detail}
@@ -109,7 +109,7 @@ const bad = [];
   for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
     const p = path.join(dir, f.name);
     if (f.isDirectory()) { if (!(dir === OUT && KEEP.has(f.name) && f.name !== 'assets')) scan(p); }
-    else if (/\.(html|txt|xml|js|json|webmanifest)$/.test(f.name) && /[–—]/.test(fs.readFileSync(p, 'utf8'))) bad.push(path.relative(OUT, p));
+    else if (/\.(html|txt|xml|js|json|webmanifest)$/.test(f.name) && /[\u2013\u2014]/.test(fs.readFileSync(p, 'utf8'))) bad.push(path.relative(OUT, p));
   }
 })(OUT);
 

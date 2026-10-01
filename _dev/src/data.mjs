@@ -20,17 +20,18 @@ export const site = {
   email: 'info@alwaheedgroup.com', // PLACEHOLDER: create this mailbox or replace it
   careersEmail: 'careers@alwaheedgroup.com', // PLACEHOLDER: create this mailbox or replace it
   address: {
-    street: 'Main 400 White Road, Sector 6, Surjani Town',
+    street: 'SB No. 2, United Palm Greens, Main 400 ft Wide Road, Scheme 43',
+    detail: 'Survey No. 416, Deh Jam Chakro, beside Silk Garden',
+    mapQuery: 'United Palm Greens, Scheme 43, Karachi',
     city: 'Karachi',
     region: 'Sindh',
-    postal: '75850',
     country: 'PK',
     countryName: 'Pakistan',
   },
   geo: { lat: 25.0369, lng: 67.0626 }, // PLACEHOLDER coordinates
   hours: [
-    { days: 'Monday to Saturday', open: '10:00', close: '19:00', label: '10:00 AM to 7:00 PM' }, // PLACEHOLDER
-    { days: 'Sunday', label: 'Site visits by appointment' },
+    { days: 'Saturday to Thursday', open: '11:00', close: '19:00', label: '11:00 AM to 7:00 PM', dayOfWeek: ['Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday'] },
+    { days: 'Friday', label: 'Closed' },
   ],
   social: {
     facebook: 'https://www.facebook.com/share/1C6BQvyL7a/',
@@ -45,16 +46,18 @@ export const stats = [
   { value: new Date().getFullYear() - 2016, suffix: '+', label: 'Years of Experience' },
   { value: 5, suffix: '', label: 'Projects & Ventures' },
   { value: 3500, suffix: '+', label: 'Families Served' }, // PLACEHOLDER
-  { value: 6, suffix: '', label: 'Group Companies' },
+  { value: 5, suffix: '', label: 'Affiliated Groups' },
 ];
 
+// Affiliated groups shown on the site. `sub: true` marks companies that are part of Al Waheed Group itself.
 export const companies = [
   {
     id: 'al-waheed-developers',
-    name: 'Al Waheed Builders & Developers',
+    name: 'Al Waheed Builders and Developers',
     sector: 'Real Estate Development',
     mark: 'emblem',
-    summary: 'The development arm of the group. Al Waheed Builders & Developers plans, builds and delivers gated communities, starting with United Palm Greens in Surjani Town, Karachi.',
+    sub: true,
+    summary: 'The development arm of the group. Al Waheed Builders and Developers plans, builds and delivers gated communities, starting with United Palm Greens in Scheme 43, Karachi.',
     services: ['Master planning and land development', 'Gated residential communities', 'Infrastructure and civil works'],
     link: ['/projects/united-palm-greens/', 'View United Palm Greens'],
   },
@@ -68,37 +71,48 @@ export const companies = [
     services: ['Construction services', 'Project marketing and sales', 'Buyer advisory'],
   },
   {
+    id: 'al-ghaffar-group',
+    name: 'Al Ghaffar Group',
+    sector: 'Real Estate Development',
+    mark: 'alghaffar',
+    summary: 'The developer of Khairunnisa Heights, a high rise apartment project on Main Scheme 33 Road, Karachi, proudly sponsored by Al Waheed Group.',
+    services: ['High rise residential projects', 'Apartment development', 'Project planning and delivery'],
+    link: ['/projects/khairunnisa-heights/', 'View Khairunnisa Heights'],
+  },
+  {
+    id: 'jinnah-real-estate',
+    name: 'Jinnah Real Estate and Builders',
+    sector: 'Real Estate & Construction',
+    mark: 'jinnah',
+    // PLACEHOLDER description and services: confirm with the client
+    summary: 'A real estate and building company affiliated with Al Waheed Group, helping buyers, sellers and investors across Karachi.',
+    services: ['Property sales and purchase', 'Building and construction', 'Investment advisory'],
+  },
+  {
     id: 'umg',
     name: 'United Marketing Group',
     sector: 'Sales & Marketing',
     mark: 'umg',
+    sub: true,
     summary: 'The sales and marketing company of the group and the official marketing partner of United Palm Greens. UMG runs launches, dealer networks and digital campaigns.',
     services: ['Project launches', 'Dealer network management', 'Digital and field marketing'],
   },
+];
+
+// Developers that Al Waheed Group represents as an authorized dealer
+export const dealerships = [
   {
-    id: 'mera-ghar',
-    name: 'Mera Ghar',
-    sector: 'Real Estate Solutions',
-    mark: 'meraghar',
-    summary: 'A home ownership service that helps first time buyers find the right plot or home, plan their budget and complete their paperwork with confidence.',
-    services: ['Property search and advisory', 'Documentation support', 'Resale and rental assistance'],
+    id: 'falaknaz-group',
+    name: 'Falaknaz Group',
+    period: 'Since 2023',
+    logo: ['/assets/img/brand/falaknaz-logo.webp', 350, 244],
+    text: 'Al Waheed Group has been an authorized dealer of Falaknaz Group since 2023, helping families and investors book Falaknaz projects with guided site visits and after sales support.',
   },
   {
-    id: 'falaknaz',
-    name: 'Falaknaz',
-    sector: 'Authorized Dealer',
-    mark: 'falaknaz',
-    summary: 'Al Waheed Group has been an authorized dealer of Falaknaz Group since 2023, helping families and investors book Falaknaz projects with guided site visits and after sales support.',
-    services: ['Authorized bookings', 'Site visits', 'Installment plan guidance'],
-    link: ['/about/#journey', 'Our dealership journey'],
-  },
-  {
-    id: 'other-ventures',
-    name: 'Other Ventures',
-    sector: 'Investments & Business Expansion',
-    mark: 'ventures',
-    summary: 'Strategic investments that extend the group beyond real estate, backing businesses that serve the communities we build.',
-    services: ['Strategic investments', 'Joint ventures', 'New business development'],
+    id: 'al-ghafoor',
+    name: 'Al Ghafoor Builders & Developers',
+    period: '2022 to 2023',
+    text: 'Al Waheed Group worked as an authorized dealer for Al Ghafoor Builders & Developers, guiding buyers through bookings, documentation and installment plans.',
   },
 ];
 
@@ -173,10 +187,11 @@ export const projects = [
     marketedBy: 'United Marketing Group',
     type: 'Gated Community',
     schemaType: 'GatedResidenceCommunity',
-    area: 'Surjani Town',
-    place: 'Surjani Town, Karachi',
-    location: 'Main 400 White Road, Sector 6, Surjani Town, Karachi',
-    mapQuery: 'Sector 6 Surjani Town Karachi',
+    area: 'Scheme 43',
+    place: 'Scheme 43, Karachi',
+    location: 'Main 400 ft Wide Road, Scheme 43, Survey No. 416, Deh Jam Chakro, Karachi',
+    mapQuery: 'United Palm Greens, Scheme 43, Karachi',
+    bookingFrom: 600000,
     plots: '120, 400 and 2,000 Sq. Yds',
     plotsShort: '120 to 2,000 Sq. Yds',
     payment: '36 monthly and 6 half yearly installments',
@@ -186,11 +201,11 @@ export const projects = [
     hero: 'united-palm-greens/r6',
     og: 'united-palm-greens',
     logo: '/assets/img/brand/upg-logo.webp',
-    intro: 'United Palm Greens is the first development of Al Waheed Group: a gated community in Sector 6, Surjani Town, planned so that worship, schooling, parks and daily shopping are all a short walk from home.',
+    intro: 'United Palm Greens is the first development of Al Waheed Group: a gated community on the Main 400 ft Wide Road in Scheme 43, Karachi, planned so that worship, schooling, parks and daily shopping are all a short walk from home.',
     body: [
-      'Set on Main 400 White Road with frontage on Surjani Town Link Road, United Palm Greens is laid out in four residential blocks (A, A-1, B and B-1) with dedicated commercial plots at the entrance. A 60 foot main boulevard runs through the community, supported by 40, 30 and 20 foot internal roads.',
+      'Set on the Main 400 ft Wide Road in Scheme 43 (Survey No. 416, Deh Jam Chakro), beside Silk Garden by Naya Nazimabad and with frontage on Surjani Town Link Road, United Palm Greens is laid out in four residential blocks (A, A-1, B and B-1) with dedicated commercial plots at the entrance. A 60 foot main boulevard runs through the community, supported by 40, 30 and 20 foot internal roads.',
       'At its heart are the Jamia Masjid Abdul Majeed, an education center, a public building, a central park with a children\'s playground and landscaped green belts. Residential towers with a commercial podium and modern townhouses give families a choice of lifestyle, all behind a grand entrance gate with 24/7 security.',
-      'Plots are available in 120, 400 and 2,000 square yard sizes. A 120 square yard plot is booked with Rs. 1,000,000 and the balance is paid over 36 monthly and 6 half yearly installments. Download the payment schedule and layout plan below, or book a site visit with our team.',
+      'Plots are available in 120, 400 and 2,000 square yard sizes. Booking starts from Rs. 600,000, with the balance paid in easy monthly and half yearly installments. Download the payment schedule and layout plan below, or book a site visit with our team.',
     ],
     amenities: [
       ['mosque', 'Jamia Masjid Abdul Majeed', 'A community mosque within walking distance'],
@@ -205,7 +220,7 @@ export const projects = [
     gallery: [
       ['united-palm-greens/r6', 'Grand entrance gate of United Palm Greens with the Al Waheed emblem'],
       ['united-palm-greens/main', 'United Palm Greens entrance and residential tower at night'],
-      ['united-palm-greens/r1', 'Aerial view of United Palm Greens, Surjani Town, Karachi'],
+      ['united-palm-greens/r1', 'Aerial view of United Palm Greens, Scheme 43, Karachi'],
       ['united-palm-greens/r5', 'Residential towers with a commercial podium at United Palm Greens'],
       ['united-palm-greens/r4', 'Modern townhouses at United Palm Greens'],
       ['united-palm-greens/r10', 'Palm lined main boulevard between townhouse rows'],
@@ -218,9 +233,9 @@ export const projects = [
       ['united-palm-greens/sports', 'Indoor cricket and gym facility'],
       ['united-palm-greens/model', 'Scale model of the United Palm Greens entrance and tower'],
     ],
-    nearby: ['Surjani Town Link Road', 'Naya Nazimabad', 'Northern Bypass', 'Schools, hospitals and markets in Surjani Town'],
+    nearby: ['Silk Garden by Naya Nazimabad', 'Surjani Town Link Road', 'Northern Bypass', 'Schools, hospitals and markets nearby'],
     faqs: [
-      ['Where is United Palm Greens located?', 'United Palm Greens is on Main 400 White Road, Sector 6, Surjani Town, Karachi, with frontage on Surjani Town Link Road.'],
+      ['Where is United Palm Greens located?', 'United Palm Greens is on the Main 400 ft Wide Road in Scheme 43, Survey No. 416, Deh Jam Chakro, Karachi, beside Silk Garden by Naya Nazimabad.'],
       ['What plot sizes are available in United Palm Greens?', 'Plots are offered in 120, 400 and 2,000 square yard sizes across Blocks A, A-1, B and B-1, with separate commercial plots at the entrance.'],
       ['What is the payment plan for a 120 square yard plot?', 'Rs. 1,000,000 on booking, Rs. 300,000 on confirmation, Rs. 300,000 on allocation, 36 monthly installments of Rs. 45,000, 6 half yearly installments and Rs. 1,000,000 on possession. The total cash price is Rs. 6,000,000.'],
       ['Are there extra charges for corner or park facing plots?', 'Yes. Corner, West Open and Single Belt plots carry Rs. 500,000 extra, and Park Facing or Road Facing plots carry Rs. 250,000 extra, payable within 180 days of booking.'],
@@ -237,16 +252,17 @@ export const projects = [
     sponsor: 'Al Waheed Group',
     type: 'Residential Apartments',
     schemaType: 'ApartmentComplex',
-    area: 'Karachi',
-    place: 'Karachi', // PLACEHOLDER: exact location to be confirmed
-    location: 'Karachi', // PLACEHOLDER
+    area: 'Scheme 33',
+    place: 'Scheme 33, Karachi',
+    location: 'Main Scheme 33 Road, Punjabi Sodagran, Karachi',
+    mapQuery: 'Punjabi Saudagaran Society, Scheme 33, Karachi',
     plotsShort: '4 & 5 Room Apartments',
     payment: '24 monthly and 4 half yearly installments',
     card: 'khairunnisa-heights/tower-day',
     hero: 'khairunnisa-heights/aerial-day',
     og: 'khairunnisa-heights',
     logo: '/assets/img/brand/kh-logo.webp',
-    intro: 'Khairunnisa Heights is a modern high rise apartment project by Al Ghaffar Group, proudly sponsored by Al Waheed Group, offering spacious 4 and 5 room homes on an easy 24 month installment plan.',
+    intro: 'Khairunnisa Heights is a modern high rise apartment project by Al Ghaffar Group on Main Scheme 33 Road, Punjabi Sodagran, Karachi. Proudly sponsored by Al Waheed Group, it offers spacious 4 and 5 room homes on an easy 24 month installment plan.',
     body: [
       'Three thoughtfully planned layouts, Ruby, Opal and Diamond, give families a choice of space and budget. Every apartment has a separate drawing room and lounge, a fitted kitchen, attached bathrooms and its own balcony, with the Diamond layout adding a third bedroom, a second balcony and a store room.',
       'Booking starts with a first down payment of Rs. 2,400,000 for a Ruby apartment. The balance is paid through a second down payment, 24 monthly installments, 4 half yearly installments and a final payment on possession, with a special discount for buyers who pay in full at the time of booking.',
@@ -265,7 +281,7 @@ export const projects = [
     units: [
       {
         id: 'ruby', name: 'Ruby', rooms: '4 Rooms', beds: 2, baths: 2, image: 'khairunnisa-heights/floor-plan-ruby',
-        spaces: [['Drawing Room', '10′6″ × 14′0″'], ['Lounge', '10′6″ × 16′6″'], ['Master Bedroom', '10′6″ × 15′6″'], ['Bedroom', '10′6″ × 11′6″'], ['Kitchen', 'Open to the lounge'], ['Bathrooms (2)', '6′0″ × 4′0″ each'], ['Balcony', '6′10″ × 6′0″']],
+        spaces: [['Drawing Room', '10′6″ × 14′0″'], ['Lounge', '10′6″ × 16′6″'], ['Master Bedroom', '10′6″ × 15′6″'], ['Bedroom', '10′6″ × 11′6″'], ['Kitchen', 'Open to the lounge'], ['Bathrooms (2)', '7′5″ × 4′0″ each'], ['Balcony', '6′10″ × 6′0″']],
         rows: [
           { label: '1st Down Payment', count: '1', amount: 2400000 },
           { label: '2nd Down Payment', count: '1', amount: 2000000 },
@@ -309,7 +325,9 @@ export const projects = [
       ['khairunnisa-heights/dusk-tower', 'Front elevation of Khairunnisa Heights at night'],
       ['khairunnisa-heights/tower-angle', 'Balconies of Khairunnisa Heights'],
     ],
+    nearby: ['Main Scheme 33 Road', 'Punjabi Sodagran', 'Schools, hospitals and markets in Scheme 33'],
     faqs: [
+      ['Where is Khairunnisa Heights located?', 'Khairunnisa Heights is on Main Scheme 33 Road, Punjabi Sodagran, Karachi.'],
       ['Who is developing Khairunnisa Heights?', 'Khairunnisa Heights is a project by Al Ghaffar Group and is sponsored by Al Waheed Group, which supports buyers with bookings, documentation and after sales service.'],
       ['What apartment types are available?', 'There are three layouts: Ruby and Opal with 4 rooms (2 bedrooms, drawing room and lounge) and Diamond with 5 rooms (3 bedrooms, drawing room, lounge, 2 balconies and a store).'],
       ['What is the payment plan for a Ruby apartment?', 'Rs. 2,400,000 first down payment, Rs. 2,000,000 second down payment, 24 monthly installments of Rs. 325,000, 4 half yearly installments of Rs. 400,000 and Rs. 500,000 on possession. The total is Rs. 14,300,000.'],
@@ -351,7 +369,7 @@ export const upcoming = [
 export const reasons = [
   ['document', 'Clear Documentation', 'Every booking comes with transparent paperwork and a verified ownership trail, so you always know exactly what you own.'],
   ['wallet', 'Flexible Installments', 'Low booking amounts with monthly and half yearly installments, designed around real family budgets.'],
-  ['pin', 'Prime Karachi Locations', 'Projects on main roads in Surjani Town with quick access to the Northern Bypass and the rest of the city.'],
+  ['pin', 'Prime Karachi Locations', 'Projects on main roads, from the 400 ft wide road in Scheme 43 to Main Scheme 33 Road, with quick access to the rest of the city.'],
   ['layers', 'Quality Construction', 'Engineered infrastructure, planned road widths and landscaped green belts, inspected at every stage.'],
   ['award', 'Proven Dealership Record', 'Years as an authorized dealer for Al Ghafoor Builders & Developers and Falaknaz Group before building our own.'],
   ['headset', 'After Sales Support', 'One advisor stays with you from booking to possession and answers when you call.'],
@@ -367,7 +385,7 @@ export const chairman = {
   message: [
     'When I founded Al Waheed Group in 2016, Karachi\'s property market was full of opportunity but short on trust. Too many families had lost their savings to unclear files and promises that were never kept. I wanted to build a company that people could rely on, one where every deal is explained in plain words and every commitment is honoured.',
     'We learned this business from the ground up. From 2022 to 2023 we worked as an authorized dealer for Al Ghafoor Builders & Developers, and since 2023 we have been an authorized dealer for Falaknaz Group. Serving families and investors through these partnerships taught us what buyers really need: fair prices, flexible installments, transparent documentation and a team that still picks up the phone after the sale.',
-    'In 2026 we took the next step and launched our own development, United Palm Greens in Surjani Town. It is a gated community planned around what our clients told us matters most: a Jamia Masjid, an education center, parks and a playground, wide roads and round the clock security, all within walking distance of home.',
+    'In 2026 we took the next step and launched our own development, United Palm Greens in Scheme 43, Karachi. It is a gated community planned around what our clients told us matters most: a Jamia Masjid, an education center, parks and a playground, wide roads and round the clock security, all within walking distance of home.',
     'My vision for Al Waheed Group is to become one of Karachi\'s most trusted names in real estate, known not only for what we build but for how honestly we deal. Alongside our own development we are proud to sponsor Khairunnisa Heights by Al Ghaffar Group, and we are preparing three new projects: United Sky View, United Greens and United Lodges.',
     'For me, leadership means accountability. Our doors are open, our numbers are clear and our word is our bond. To every family and investor who has trusted us, thank you. Together, we will keep building better lives.',
   ],
@@ -404,7 +422,7 @@ export const testimonials = [
 ];
 
 export const homeFaqs = [
-  ['Where are Al Waheed Group projects located?', 'Our flagship development, United Palm Greens, is on Main 400 White Road, Sector 6, Surjani Town, Karachi, with frontage on Surjani Town Link Road. We also sponsor Khairunnisa Heights, an apartment project in Karachi.'],
+  ['Where are Al Waheed Group projects located?', 'United Palm Greens is on the Main 400 ft Wide Road in Scheme 43, Karachi, beside Silk Garden by Naya Nazimabad. Khairunnisa Heights, which we sponsor, is on Main Scheme 33 Road, Punjabi Sodagran, Karachi.'],
   ['What apartments are available at Khairunnisa Heights?', 'Khairunnisa Heights offers Ruby and Opal 4 room apartments and Diamond 5 room apartments, on a plan of two down payments, 24 monthly and 4 half yearly installments and a payment on possession.'],
   ['What is the payment plan for United Palm Greens?', 'A 120 square yard plot is booked with Rs. 1,000,000, followed by payments on confirmation and allocation, 36 monthly and 6 half yearly installments, and Rs. 1,000,000 on possession. You can download the full payment schedule on the project page.'],
   ['Can overseas Pakistanis book a plot remotely?', 'Yes. We handle the full booking remotely, with virtual site tours, digital documentation and an advisor available on WhatsApp across time zones.'],
@@ -417,7 +435,7 @@ export const milestones = [
   ['2016', 'Al Waheed Group Founded', 'Abdul Waheed Meo founds the group in Karachi with a promise of honest, transparent real estate.'],
   ['2022', 'Al Ghafoor Builders & Developers', 'Al Waheed becomes an authorized dealer for Al Ghafoor Builders & Developers, until 2023.'],
   ['2023', 'Falaknaz Group', 'Authorized dealership with Falaknaz Group begins and continues today.'],
-  ['2026', 'United Palm Greens', 'Launch of the group\'s first own development in Surjani Town, Karachi.'],
+  ['2026', 'United Palm Greens', 'Launch of the group\'s first own development in Scheme 43, Karachi.'],
   ['Now', 'Khairunnisa Heights', 'Al Waheed Group sponsors Khairunnisa Heights, a high rise apartment project by Al Ghaffar Group.'],
   ['Next', 'Three New Projects', 'United Sky View, United Greens and United Lodges are in the pipeline.'],
 ];
@@ -432,13 +450,13 @@ export const values = [
 // PLACEHOLDER jobs. Remove or replace before launch.
 export const jobs = [
   { title: 'Real Estate Sales Executive', dept: 'Sales', location: 'Karachi', type: 'Full time', employmentType: 'FULL_TIME', summary: 'Guide families and investors through our projects, arrange site visits and manage clients from first call to booking.', points: ['1 to 3 years of sales experience, real estate preferred', 'Confident communication in Urdu and English', 'Own transport is a plus'] },
-  { title: 'Site Engineer (Civil)', dept: 'Projects', location: 'Surjani Town, Karachi', type: 'Full time', employmentType: 'FULL_TIME', summary: 'Supervise roads, utilities and building works at United Palm Greens, ensuring quality, safety and timelines.', points: ['BE Civil with 2 or more years of site experience', 'Registered with Pakistan Engineering Council', 'Strong knowledge of infrastructure works'] },
+  { title: 'Site Engineer (Civil)', dept: 'Projects', location: 'Scheme 43, Karachi', type: 'Full time', employmentType: 'FULL_TIME', summary: 'Supervise roads, utilities and building works at United Palm Greens, ensuring quality, safety and timelines.', points: ['BE Civil with 2 or more years of site experience', 'Registered with Pakistan Engineering Council', 'Strong knowledge of infrastructure works'] },
   { title: 'Digital Marketing Executive', dept: 'Marketing', location: 'Karachi', type: 'Full time', employmentType: 'FULL_TIME', summary: 'Plan and run social media, search and lead generation campaigns for group projects.', points: ['Hands on experience with Meta and Google Ads', 'Content planning and basic design skills', 'Real estate campaign experience is a plus'] },
   { title: 'Customer Relationship Officer', dept: 'After Sales', location: 'Karachi', type: 'Full time', employmentType: 'FULL_TIME', summary: 'Support existing clients with installments, documents and updates, including our overseas clients.', points: ['Excellent phone and WhatsApp etiquette', 'Organised, patient and detail oriented', 'Comfortable with evening shifts for overseas clients'] },
 ];
 
 export const perks = [
-  ['trend', 'Growth Paths', 'Clear promotion tracks across six group companies.'],
+  ['trend', 'Growth Paths', 'Clear promotion tracks across our affiliated groups.'],
   ['award', 'Performance Rewards', 'Competitive salaries with attractive commissions and bonuses.'],
   ['users', 'Supportive Team', 'Experienced mentors in sales, engineering and finance.'],
   ['headset', 'Training', 'Regular training on sales, compliance and customer care.'],

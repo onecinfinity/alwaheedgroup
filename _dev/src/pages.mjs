@@ -1,10 +1,10 @@
 import fs from 'node:fs';
 import {
-  site, stats, companies, projects, upcoming, reasons, chairman, board, testimonials, homeFaqs, milestones, values, jobs, perks,
+  site, stats, companies, dealerships, projects, upcoming, reasons, chairman, board, testimonials, homeFaqs, milestones, values, jobs, perks,
   paymentPlan as plan, downloads,
 } from './data.mjs';
 import {
-  pic, imgUrl, preloadImage, icon, esc, abs, tel, wa, btn, sectionHead, projectCard, soonCard, docCard, companyCard, companyMark,
+  pic, imgUrl, preloadImage, icon, esc, abs, tel, wa, btn, sectionHead, projectCard, soonCard, docCard, companyCard, companyMark, dealerCards,
   personCard, quoteCard, portrait, statsBlock, faqList, consultForm, pageHero, ctaBand, mapFacade, businessNode, faqNode,
   postalAddress, TODAY, takeHeroImage,
 } from './layout.mjs';
@@ -57,8 +57,8 @@ const docStrip = () => `<div class="doc-strip" data-reveal>
 /* ============ HOME ============ */
 function home() {
   const slides = [
-    ['united-palm-greens/main', 'United Palm Greens gated community entrance and residential tower at night, Surjani Town, Karachi', 'United Palm Greens, Surjani Town', upg.slug],
-    ['khairunnisa-heights/aerial-day', 'Aerial view of Khairunnisa Heights apartments, Karachi', 'Khairunnisa Heights, Karachi', kh.slug],
+    ['united-palm-greens/main', 'United Palm Greens gated community entrance and residential tower at night, Scheme 43, Karachi', 'United Palm Greens, Scheme 43', upg.slug],
+    ['khairunnisa-heights/aerial-day', 'Aerial view of Khairunnisa Heights apartments, Scheme 33, Karachi', 'Khairunnisa Heights, Scheme 33', kh.slug],
     ['united-palm-greens/r6', 'Grand entrance gate of United Palm Greens with the Al Waheed emblem', 'Grand Entrance, United Palm Greens', upg.slug],
   ];
   const body = `
@@ -86,7 +86,7 @@ function home() {
 <div class="split__text">
 ${sectionHead({ eyebrow: 'About Us', title: 'A Legacy of Trust &amp; Excellence', id: 'about-title' })}
 <p data-reveal>Founded in ${site.foundingYear} by ${chairman.name}, ${site.name} is a Karachi business group working across real estate development, construction, sales, marketing and investment. For ${years} years we have helped families and investors buy property with confidence.</p>
-<p data-reveal>We earned our name as an authorized dealer for Al Ghafoor Builders &amp; Developers and Falaknaz Group. Today we build our own, United Palm Greens in Surjani Town, and proudly sponsor Khairunnisa Heights.</p>
+<p data-reveal>We earned our name as an authorized dealer for Al Ghafoor Builders &amp; Developers and Falaknaz Group. Today we build our own, United Palm Greens in Scheme 43, and proudly sponsor Khairunnisa Heights in Scheme 33.</p>
 <ul class="checks" data-reveal>${check('Clear documentation on every booking')}${check('Authorized dealer for Falaknaz Group since 2023')}${check('One advisor from booking to possession')}</ul>
 <div data-reveal>${btn('/about/', 'Our Story', 'outline')}</div>
 </div>
@@ -97,8 +97,9 @@ ${sectionHead({ eyebrow: 'About Us', title: 'A Legacy of Trust &amp; Excellence'
 
 <section class="section section--ivory" aria-labelledby="companies-title">
 <div class="container">
-${sectionHead({ eyebrow: 'Our Group of Companies', title: 'A Diverse Portfolio, One Shared Vision', sub: 'Six companies working together across development, construction, marketing and investment.', center: true, id: 'companies-title' })}
+${sectionHead({ eyebrow: 'Affiliated Groups', title: 'A Diverse Portfolio, One Shared Vision', sub: 'Five groups working together across development, construction and marketing.', center: true, id: 'companies-title' })}
 <div class="company-grid" data-stagger>${companies.map((c) => companyCard(c)).join('')}</div>
+<p class="dealer-line" data-reveal>${icon('award', '', 20)}<span><strong>Authorized dealer</strong> for ${dealerships.map((d) => d.name).join(' and ')}.</span><a class="link" href="/affiliated-groups/#dealerships">Learn more ${icon('arrow', '', 16)}</a></p>
 </div>
 </section>
 
@@ -112,7 +113,7 @@ ${docStrip()}
 
 <section class="section section--ivory" aria-labelledby="why-title">
 <div class="container why">
-<div class="why__media" data-reveal>${pic('united-palm-greens/r5-tall', { alt: 'Residential tower at United Palm Greens, Surjani Town', sizes: '(min-width: 1000px) 440px, 92vw' })}
+<div class="why__media" data-reveal>${pic('united-palm-greens/r5-tall', { alt: 'Residential tower at United Palm Greens, Scheme 43, Karachi', sizes: '(min-width: 1000px) 440px, 92vw' })}
 <div class="why__badge"><strong>${years}+</strong><span>Years of building trust in Karachi</span></div></div>
 <div class="why__body">
 ${sectionHead({ eyebrow: 'Why Al Waheed Group?', title: 'Why Families and Investors Choose Us', id: 'why-title' })}
@@ -198,7 +199,7 @@ ${btn('/careers/', 'View Open Roles')}
 /* ============ ABOUT ============ */
 function about() {
   const body = `
-${pageHero({ image: 'united-palm-greens/r1', alt: 'Aerial view of United Palm Greens, a gated community by Al Waheed Group in Surjani Town, Karachi', eyebrow: 'About Us', title: 'About Al Waheed Group of Companies', lead: 'A Karachi real estate group built on one simple promise: every family deserves to buy property with confidence.', crumbs: [['About', '/about/']] })}
+${pageHero({ image: 'united-palm-greens/r1', alt: 'Aerial view of United Palm Greens, a gated community by Al Waheed Group in Scheme 43, Karachi', eyebrow: 'About Us', title: 'About Al Waheed Group of Companies', lead: 'A Karachi real estate group built on one simple promise: every family deserves to buy property with confidence.', crumbs: [['About', '/about/']] })}
 
 <section class="section" aria-labelledby="story-title">
 <div class="container split">
@@ -206,9 +207,9 @@ ${pageHero({ image: 'united-palm-greens/r1', alt: 'Aerial view of United Palm Gr
 ${sectionHead({ eyebrow: 'Our Story', title: 'From Trusted Dealer to Developer', id: 'story-title' })}
 <p data-reveal>${chairman.name} founded ${site.name} in ${site.foundingYear} with a clear purpose: to protect buyers from unclear paperwork and broken promises. Families trusted us because we explained every document, every payment and every risk in plain words.</p>
 <p data-reveal>That trust carried us through years of dealership work. From 2022 to 2023 we were an authorized dealer for Al Ghafoor Builders &amp; Developers, and since 2023 we have been an authorized dealer for Falaknaz Group, helping families and overseas Pakistanis invest in well planned communities.</p>
-<p data-reveal>In 2026 we launched our own development, United Palm Greens in Surjani Town. Today the group brings together development, construction, sales and marketing, home ownership services and investment, and we are proud to sponsor Khairunnisa Heights by Al Ghaffar Group while preparing three new projects: United Sky View, United Greens and United Lodges.</p>
+<p data-reveal>In 2026 we launched our own development, United Palm Greens in Scheme 43, Karachi. Today the group and its affiliates cover development, construction, sales and marketing, and we are proud to sponsor Khairunnisa Heights by Al Ghaffar Group while preparing three new projects: United Sky View, United Greens and United Lodges.</p>
 </div>
-<div class="split__media framed" data-reveal>${pic('united-palm-greens/r6', { alt: 'Grand entrance of United Palm Greens in Surjani Town, Karachi', sizes: '(min-width: 1000px) 560px, 92vw' })}</div>
+<div class="split__media framed" data-reveal>${pic('united-palm-greens/r6', { alt: 'Grand entrance of United Palm Greens in Scheme 43, Karachi', sizes: '(min-width: 1000px) 560px, 92vw' })}</div>
 </div>
 </section>
 
@@ -317,14 +318,14 @@ ${ctaBand()}`;
 /* ============ COMPANIES ============ */
 function companiesPage() {
   const body = `
-${pageHero({ image: 'united-palm-greens/r8', alt: 'Residential towers at United Palm Greens, developed by Al Waheed Group', eyebrow: 'Our Portfolio', title: 'Our Group of Companies', lead: 'Six companies, one shared vision: building better lives through real estate, construction, marketing and investment.', crumbs: [['Our Companies', '/our-companies/']] })}
+${pageHero({ image: 'united-palm-greens/r8', alt: 'Residential towers at United Palm Greens, developed by Al Waheed Group', eyebrow: 'Our Network', title: 'Affiliated Groups', lead: 'Five groups, one shared vision: building better lives through real estate development, construction and marketing.', crumbs: [['Affiliated Groups', '/affiliated-groups/']] })}
 <section class="section" aria-labelledby="port-title">
 <div class="container">
-${sectionHead({ eyebrow: 'A Diverse Portfolio', title: 'Working Together From Land to Handover', sub: 'Each company focuses on one part of the property journey, so clients get specialist care at every step.', center: true, id: 'port-title' })}
+${sectionHead({ eyebrow: 'Affiliated Groups', title: 'Working Together From Land to Handover', sub: 'Each group focuses on one part of the property journey, so clients get specialist care at every step.', center: true, id: 'port-title' })}
 <div class="company-grid" data-stagger>${companies.map((c) => companyCard(c)).join('')}</div>
 </div>
 </section>
-<section class="section section--ivory" aria-label="Company profiles">
+<section class="section section--ivory" aria-label="Affiliated group profiles">
 <div class="container co-list">
 ${companies.map((c) => `<article class="co-row" id="${c.id}" data-reveal>
 <div class="co-row__mark">${companyMark(c)}</div>
@@ -339,11 +340,17 @@ ${c.link ? `<a class="link" href="${c.link[0]}">${c.link[1]} ${icon('arrow', '',
 </article>`).join('')}
 </div>
 </section>
+<section class="section" id="dealerships" aria-labelledby="dealer-title">
+<div class="container">
+${sectionHead({ eyebrow: 'Authorized Dealer', title: 'Trusted by Leading Developers', sub: 'Before building our own projects, we earned our reputation representing established developers as an authorized dealer.', center: true, id: 'dealer-title' })}
+${dealerCards()}
+</div>
+</section>
 ${ctaBand()}`;
   return {
-    path: '/our-companies/', crumbs: [['Our Companies', '/our-companies/']],
-    title: 'Our Group of Companies | Al Waheed Group Karachi',
-    description: 'Explore the Al Waheed Group portfolio: Al Waheed Builders & Developers, HK Builders and Developers, United Marketing Group, Mera Ghar, Falaknaz and more.',
+    path: '/affiliated-groups/', crumbs: [['Affiliated Groups', '/affiliated-groups/']],
+    title: 'Affiliated Groups | Al Waheed Group of Companies',
+    description: 'Al Waheed Group affiliated groups: Al Waheed Builders and Developers, HK Builders and Developers, Al Ghaffar Group, Jinnah Real Estate and Builders and UMG.',
     body,
   };
 }
@@ -351,7 +358,7 @@ ${ctaBand()}`;
 /* ============ PROJECTS ============ */
 function projectsPage() {
   const body = `
-${pageHero({ image: 'united-palm-greens/r7', alt: 'Central park at United Palm Greens, Surjani Town, Karachi', eyebrow: 'Our Projects', title: 'Real Estate Projects in Karachi', lead: 'Our flagship gated community, a high rise we proudly sponsor and three new projects on the way.', crumbs: [['Projects', '/projects/']] })}
+${pageHero({ image: 'united-palm-greens/r7', alt: 'Central park at United Palm Greens, Scheme 43, Karachi', eyebrow: 'Our Projects', title: 'Real Estate Projects in Karachi', lead: 'Our flagship gated community, a high rise we proudly sponsor and three new projects on the way.', crumbs: [['Projects', '/projects/']] })}
 <section class="section" aria-labelledby="flag-title">
 <div class="container">
 ${sectionHead({ eyebrow: 'Now Booking', title: 'Our Current Projects', center: true, id: 'flag-title' })}
@@ -364,7 +371,7 @@ ${sectionHead({ eyebrow: 'Now Booking', title: 'Our Current Projects', center: t
 <h2 class="h2">${upg.name}</h2>
 <p class="feature-project__tag">${upg.tagline}</p>
 <p>${upg.intro}</p>
-<dl class="mini-facts"><div><dt>Location</dt><dd>${upg.place}</dd></div><div><dt>Plot Sizes</dt><dd>${upg.plots}</dd></div><div><dt>Booking From</dt><dd>Rs. ${rs(plan.rows[0].amount)}</dd></div></dl>
+<dl class="mini-facts"><div><dt>Location</dt><dd>${upg.place}</dd></div><div><dt>Plot Sizes</dt><dd>${upg.plots}</dd></div><div><dt>Booking From</dt><dd>Rs. ${rs(upg.bookingFrom)}</dd></div></dl>
 <div class="feature-project__actions">${btn(`/projects/${upg.slug}/`, 'View Project')}<a class="btn btn--outline" href="${downloads.paymentSchedule.file}" download>Payment Schedule${icon('download', '', 18)}</a></div>
 </div>
 </article>
@@ -376,7 +383,7 @@ ${sectionHead({ eyebrow: 'Now Booking', title: 'Our Current Projects', center: t
 <h2 class="h2">${kh.name}</h2>
 <p class="feature-project__tag">${kh.tagline}</p>
 <p>${kh.intro}</p>
-<dl class="mini-facts"><div><dt>Project By</dt><dd>${kh.developer}</dd></div><div><dt>Apartments</dt><dd>${kh.units.map((u) => u.name).join(', ')}</dd></div><div><dt>Starting From</dt><dd>Rs. ${rs(Math.min(...kh.units.map((u) => u.total)))}</dd></div></dl>
+<dl class="mini-facts"><div><dt>Location</dt><dd>${kh.place}</dd></div><div><dt>Apartments</dt><dd>${kh.units.map((u) => u.name).join(', ')}</dd></div><div><dt>Starting From</dt><dd>Rs. ${rs(Math.min(...kh.units.map((u) => u.total)))}</dd></div></dl>
 <div class="feature-project__actions">${btn(`/projects/${kh.slug}/`, 'View Project')}<a class="btn btn--outline" href="${downloads.khairunnisa.file}" download>Payment Schedules${icon('download', '', 18)}</a></div>
 </div>
 </article>
@@ -437,7 +444,7 @@ function paymentTable() {
 
 function projectPage(p) {
   const url = abs(`/projects/${p.slug}/`);
-  const facts = [['Location', p.location], ['Plot Sizes', p.plots], ['Booking From', `Rs. ${rs(plan.rows[0].amount)}`], ['Payment Plan', p.payment], ['Status', p.status], ['Developer', p.developer]];
+  const facts = [['Location', p.location], ['Plot Sizes', p.plots], ['Booking From', `Rs. ${rs(p.bookingFrom)}`], ['Payment Plan', p.payment], ['Status', p.status], ['Developer', p.developer]];
   const d = downloads;
   const body = `
 ${pageHero({ image: p.hero, alt: `${p.name}, ${p.area}, Karachi`, eyebrow: `${p.type} in ${p.area}, Karachi`, title: p.name, lead: p.tagline, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]], actions: `${btn('#enquire', 'Enquire Now')}<a class="btn btn--light" href="${d.paymentSchedule.file}" download>Payment Schedule${icon('download', '', 18)}</a>` })}
@@ -535,7 +542,7 @@ ${sectionHead({ eyebrow: 'Coming Next', title: 'More From Al Waheed Group', id: 
   return {
     path: `/projects/${p.slug}/`, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]],
     title: 'United Palm Greens Karachi | Payment Plan & Layout Plan',
-    description: 'United Palm Greens by Al Waheed Group: gated community in Surjani Town, Karachi with 120, 400 and 2,000 sq. yd plots. Get the payment schedule and layout plan.',
+    description: 'United Palm Greens by Al Waheed Group: a gated community in Scheme 43, Karachi. Booking from Rs. 600,000. Download the payment schedule and layout plan.',
     ogImage: `/assets/img/og/${p.og}.jpg`, ogAlt: p.name,
     schema: [place, ...docs, faqNode(url, p.faqs)],
     body,
@@ -547,7 +554,7 @@ function khPage(p) {
   const url = abs(`/projects/${p.slug}/`);
   const d = downloads.khairunnisa;
   const from = Math.min(...p.units.map((u) => u.total));
-  const facts = [['Project By', p.developer], ['Sponsored By', p.sponsor], ['Apartments', `${p.units.map((u) => u.name).join(', ')}`], ['Starting From', `Rs. ${rs(from)}`], ['Payment Plan', p.payment], ['Status', p.status]];
+  const facts = [['Location', p.location], ['Project By', p.developer], ['Sponsored By', p.sponsor], ['Apartments', `${p.units.map((u) => u.name).join(', ')}`], ['Starting From', `Rs. ${rs(from)}`], ['Payment Plan', p.payment]];
   const unitTab = (u, i) => `<button class="unit-tabs__tab" type="button" role="tab" id="tab-${u.id}" aria-controls="${u.id}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}><strong>${u.name}</strong><span>${u.rooms} &middot; Rs. ${rs(u.total)}</span></button>`;
   const unitPanel = (u) => `<div class="unit" role="tabpanel" id="${u.id}" aria-labelledby="tab-${u.id}">
 <a class="unit__plan" href="${imgUrl(u.image, 1600)}" data-lightbox data-caption="${esc(`${p.name} ${u.name} apartment floor plan (${u.rooms})`)}">${pic(u.image, { alt: `${p.name} ${u.name} ${u.rooms.toLowerCase()} apartment floor plan`, sizes: '(min-width: 1000px) 540px, 92vw' })}<span class="plan-view__hint">${icon('expand', '', 18)}View floor plan</span></a>
@@ -561,7 +568,7 @@ ${payRowsTable(u.rows, u.total, 'Total Amount', `${p.name} ${u.name} apartment p
 </div>
 </div>`;
   const body = `
-${pageHero({ image: p.hero, alt: `${p.name} apartments, Karachi`, eyebrow: `${p.type}, Karachi`, title: p.name, lead: p.tagline, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]], actions: `${btn('#apartments', 'View Apartments')}<a class="btn btn--light" href="${d.file}" download>Payment Schedules${icon('download', '', 18)}</a>` })}
+${pageHero({ image: p.hero, alt: `${p.name} apartments, ${p.place}`, eyebrow: `${p.type}, ${p.place}`, title: p.name, lead: p.tagline, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]], actions: `${btn('#apartments', 'View Apartments')}<a class="btn btn--light" href="${d.file}" download>Payment Schedules${icon('download', '', 18)}</a>` })}
 <section class="facts-wrap" aria-label="Key facts"><div class="container"><dl class="facts" data-stagger>${facts.map(([k, v]) => `<div data-reveal><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl></div></section>
 
 <section class="section">
@@ -580,6 +587,12 @@ ${p.body.map((t) => `<p data-reveal>${t}</p>`).join('')}
 <section aria-labelledby="am-title" class="detail__block">
 ${sectionHead({ eyebrow: 'Features', title: 'Living at Khairunnisa Heights', id: 'am-title' })}
 <ul class="amenities" data-stagger>${p.amenities.map(([ic, t, dd]) => `<li data-reveal><span class="feature__icon">${icon(ic, '', 22)}</span><div><h3>${t}</h3><p>${dd}</p></div></li>`).join('')}</ul>
+</section>
+<section aria-labelledby="loc-title" class="detail__block">
+${sectionHead({ eyebrow: 'Location', title: `Where ${p.name} Is`, id: 'loc-title' })}
+<p class="detail__address" data-reveal>${icon('pin', '', 20)}<span>${p.location}</span></p>
+<ul class="checks checks--cols" data-reveal>${p.nearby.map(check).join('')}</ul>
+${mapFacade(p.mapQuery, `${p.name}, ${p.location}`)}
 </section>
 </div>
 <aside class="detail__aside" id="enquire" aria-labelledby="enq-title">
@@ -636,15 +649,15 @@ ${lightboxDialog}`;
   const place = {
     '@type': p.schemaType, '@id': `${url}#project`, name: p.name, description: p.intro, url, slogan: p.tagline,
     image: p.gallery.slice(0, 4).map(([k]) => abs(imgUrl(k, 1200))),
-    address: { '@type': 'PostalAddress', addressLocality: 'Karachi', addressRegion: 'Sindh', addressCountry: 'PK' },
+    address: postalAddress(p.location.replace(/, Karachi$/, '')),
     containedInPlace: { '@type': 'City', name: 'Karachi' },
     amenityFeature: p.amenities.map(([, t]) => ({ '@type': 'LocationFeatureSpecification', name: t, value: true })),
     containsPlace: p.units.map((u) => ({ '@type': 'Apartment', name: `${p.name} ${u.name}`, numberOfRooms: parseInt(u.rooms, 10), numberOfBedrooms: u.beds, numberOfBathroomsTotal: u.baths })),
   };
   return {
     path: `/projects/${p.slug}/`, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]],
-    title: 'Khairunnisa Heights Karachi | Apartments on Installments',
-    description: 'Khairunnisa Heights by Al Ghaffar Group, sponsored by Al Waheed Group: 4 and 5 room apartments on 24 month installments. See floor plans and payment schedules.',
+    title: 'Khairunnisa Heights, Scheme 33 Karachi | Apartments',
+    description: 'Khairunnisa Heights on Main Scheme 33 Road, Karachi: 4 and 5 room apartments by Al Ghaffar Group on 24 month installments. Floor plans and payment schedules.',
     ogImage: `/assets/img/og/${p.og}.jpg`, ogAlt: p.name,
     schema: [place, { '@type': 'DigitalDocument', name: `${p.name} ${d.title}`, url: abs(d.file), encodingFormat: 'application/pdf', about: { '@id': `${url}#project` } }, faqNode(url, p.faqs)],
     body,
@@ -719,7 +732,7 @@ function contactPage() {
     ['pin', 'Visit Us', `${a.street}, ${a.city}`, '#office', ''],
   ];
   const body = `
-${pageHero({ image: 'united-palm-greens/r4', alt: 'Townhouses at United Palm Greens, Surjani Town, Karachi', eyebrow: 'Contact Us', title: 'Contact Al Waheed Group', lead: 'Book a free consultation, call our advisors or visit our office in Surjani Town, Karachi.', crumbs: [['Contact', '/contact/']] })}
+${pageHero({ image: 'united-palm-greens/r4', alt: 'Townhouses at United Palm Greens, Scheme 43, Karachi', eyebrow: 'Contact Us', title: 'Contact Al Waheed Group', lead: 'Book a free consultation, call our advisors or visit our office at United Palm Greens, Scheme 43, Karachi.', crumbs: [['Contact', '/contact/']] })}
 <section class="section section--tight" aria-label="Contact options">
 <div class="container"><div class="contact-cards" data-stagger>${cards.map(([ic, t, v, h, x]) => `<a class="contact-card" href="${h}"${x} data-reveal><span class="feature__icon">${icon(ic, ic === 'whatsapp' ? 'icon--wa' : '', 24)}</span><span class="contact-card__t">${t}</span><span class="contact-card__v">${v}</span></a>`).join('')}</div></div>
 </section>
@@ -729,13 +742,13 @@ ${consultSection({ title: 'Book a Free Consultation' })}
 <div class="office__info">
 ${sectionHead({ eyebrow: 'Head Office', title: 'Visit Our Office', id: 'office-title' })}
 <address data-reveal>
-<p>${icon('pin', '', 20)}<span>${a.street},<br>${a.city}, ${a.region}, ${a.countryName}</span></p>
+<p>${icon('pin', '', 20)}<span>${a.street},<br>${a.detail},<br>${a.city}, ${a.countryName}</span></p>
 <p>${icon('phone', '', 20)}<a href="${tel}">${site.phone}</a></p>
 <p>${icon('mail', '', 20)}<a href="mailto:${site.email}">${site.email}</a></p>
 </address>
 <div class="hours" data-reveal><h3>Office Hours</h3><dl>${site.hours.map((h) => `<div><dt>${h.days}</dt><dd>${h.label}</dd></div>`).join('')}</dl></div>
 </div>
-<div class="office__map" data-reveal>${mapFacade(`${a.street}, ${a.city}`, `${site.name}, ${a.street}, ${a.city}`)}</div>
+<div class="office__map" data-reveal>${mapFacade(a.mapQuery, `${site.name}, ${a.street}, ${a.city}`)}</div>
 </div>
 </section>
 <section class="section" aria-labelledby="cfaq-title">
@@ -747,7 +760,7 @@ ${faqList(homeFaqs.slice(0, 5))}
   return {
     path: '/contact/', crumbs: [['Contact', '/contact/']], pageType: 'ContactPage',
     title: 'Contact Al Waheed Group | Book a Free Consultation',
-    description: 'Call or WhatsApp Al Waheed Group on +92 306 0005559, or visit us in Surjani Town, Karachi. Book a free consultation on plots and payment plans.',
+    description: 'Call or WhatsApp Al Waheed Group on +92 306 0005559, or visit us at United Palm Greens, Scheme 43, Karachi. Book a free consultation today.',
     schema: [businessNode(), faqNode(abs('/contact/'), homeFaqs.slice(0, 5))],
     body,
   };

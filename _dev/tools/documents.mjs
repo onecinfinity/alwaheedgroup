@@ -86,7 +86,7 @@ ol li::marker { font-weight: 700; color: #8A6A2C; }
 </style></head><body><div class="page">
 <header class="head">
 <img src="${asset('assets/img/brand/upg-logo.png')}" alt="United Palm Greens">
-<div class="title"><p class="kicker">${plan.project} &middot; Surjani Town, Karachi</p><h1>Payment Schedule</h1><p class="plot"><strong>${plan.plot}</strong>${plan.category}</p></div>
+<div class="title"><p class="kicker">${plan.project} &middot; Scheme 43, Karachi</p><h1>Payment Schedule</h1><p class="plot"><strong>${plan.plot}</strong>${plan.category}</p></div>
 <img src="${asset('assets/img/brand/alwaheed-bd-logo.png')}" alt="Al Waheed Builders &amp; Developers">
 </header>
 <div class="rule"></div>

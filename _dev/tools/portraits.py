@@ -21,7 +21,7 @@ FADE = (520, 625)
 PEOPLE = {
     'team/abdul-waheed-meo': ('Abdul waheed meo chairman  founder.jpeg', (140, 119, 274, 274), 'multiply'),
     'team/muhammad-saeed-meo': ('Muhammad Saeed meo director operations.jpeg', (99, 77, 158, 158), 'multiply'),
-    'team/babar-majeed-meo': ('Babar Majeed meo director sales and marketing.jpeg', (162, 84, 128, 128), 'cutout'),
+    'team/babar-majeed-meo': ('Babar Majeed meo director sales and marketing (new).jpg', (413, 264, 107, 107), 'cutout'),
 }
 
 
@@ -37,20 +37,40 @@ def backdrop():
 
 def cutout_alpha(im, face):
     """GrabCut the person off a plain wall, seeded with the face and torso as foreground."""
+    fx, fy, fw, fh = face
+    full_h = im.height
+    im = im.crop((0, 0, im.width, min(im.height, int(fy + fh * 3.2))))  # only the bust is shown; less to segment
     a = np.array(im)[:, :, ::-1].copy()
     h, w = a.shape[:2]
-    fx, fy, fw, fh = face
     m = np.full((h, w), cv2.GC_BGD, np.uint8)
-    chin = int(fy + fh * 1.05)
-    m[max(int(fy - fh * .55), 0):chin, max(int(fx + fw * .12), 0):int(fx + fw * 1.4)] = cv2.GC_PR_FGD
-    m[chin:h, max(int(fx - fw * 1.2), 0):min(int(fx + fw * 2.4), w)] = cv2.GC_PR_FGD
-    m[int(fy + fh * .2):int(fy + fh * .95), int(fx + fw * .35):int(fx + fw * .9)] = cv2.GC_FGD
-    m[int(fy + fh * 1.25):h, int(fx + fw * .1):int(fx + fw * .9)] = cv2.GC_FGD
+    head_l, head_r = fx - fw * .28, fx + fw * 1.22
+    neck_l, neck_r = fx - fw * .05, fx + fw * 1.0
+    body_l, body_r = fx - fw * 1.35, fx + fw * 2.1
+    ear, neck, shoulders = int(fy + fh * .8), int(fy + fh * 1.2), int(fy + fh * 2.0)
+    # hourglass shaped zone: head and hair, narrowing to the neck, widening along the shoulders
+    for y in range(max(int(fy - fh * .6), 0), h):
+        if y < ear:
+            l, r = head_l, head_r
+        elif y < neck:
+            t = (y - ear) / (neck - ear)
+            l, r = head_l + (neck_l - head_l) * t, head_r + (neck_r - head_r) * t
+        else:
+            t = min((y - neck) / (shoulders - neck), 1.0)
+            l, r = neck_l + (body_l - neck_l) * t, neck_r + (body_r - neck_r) * t
+        m[y, max(int(l), 0):min(int(r), w)] = cv2.GC_PR_FGD
+    m[int(fy + fh * .15):int(fy + fh * .95), int(fx + fw * .2):int(fx + fw * .8)] = cv2.GC_FGD
+    m[int(fy + fh * 1.3):h, int(fx + fw * .15):int(fx + fw * .85)] = cv2.GC_FGD
     bgd, fgd = np.zeros((1, 65), np.float64), np.zeros((1, 65), np.float64)
-    cv2.grabCut(a, m, None, bgd, fgd, 6, cv2.GC_INIT_WITH_MASK)
+    cv2.grabCut(a, m, None, bgd, fgd, 10, cv2.GC_INIT_WITH_MASK)
     alpha = np.where((m == cv2.GC_FGD) | (m == cv2.GC_PR_FGD), 255, 0).astype(np.uint8)
-    alpha = cv2.morphologyEx(alpha, cv2.MORPH_OPEN, np.ones((5, 5), np.uint8))
-    return Image.fromarray(alpha, 'L').filter(ImageFilter.GaussianBlur(1.5))
+    alpha = cv2.morphologyEx(alpha, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
+    # keep only the person: the largest connected region
+    n, labels, stats, _ = cv2.connectedComponentsWithStats(alpha)
+    if n > 2:
+        alpha = np.where(labels == 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA])), 255, 0).astype(np.uint8)
+    out = Image.new('L', (w, full_h), 0)
+    out.paste(Image.fromarray(alpha, 'L').filter(ImageFilter.GaussianBlur(1.5)), (0, 0))
+    return out
 
 
 def render(fname, face, mode):
