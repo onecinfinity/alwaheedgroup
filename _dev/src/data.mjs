@@ -46,7 +46,7 @@ export const stats = [
   { value: new Date().getFullYear() - 2016, suffix: '+', label: 'Years of Experience' },
   { value: 5, suffix: '', label: 'Projects & Ventures' },
   { value: 3500, suffix: '+', label: 'Families Served' }, // PLACEHOLDER
-  { value: 5, suffix: '', label: 'Affiliated Groups' },
+  { value: 8, suffix: '', label: 'Affiliated Groups' },
 ];
 
 // Affiliated groups shown on the site. `sub: true` marks companies that are part of Al Waheed Group itself.
@@ -97,6 +97,32 @@ export const companies = [
     summary: 'The sales and marketing company of the group and the official marketing partner of United Palm Greens. UMG runs launches, dealer networks and digital campaigns.',
     services: ['Project launches', 'Dealer network management', 'Digital and field marketing'],
   },
+  // PLACEHOLDER descriptions and services for the three groups below: confirm with the client
+  {
+    id: 'al-ghafoor-group',
+    name: 'Al Ghafoor Group',
+    sector: 'Real Estate Development',
+    mark: 'alghafoor',
+    summary: 'An established Karachi real estate group and a long standing partner of Al Waheed, which served as its authorized dealer from 2022 to 2023.',
+    services: ['Residential and commercial projects', 'Construction and development', 'Dealer partnerships'],
+    link: ['/affiliated-groups/#dealerships', 'Our dealership history'],
+  },
+  {
+    id: 'mera-ghar-rehaish',
+    name: 'Mera Ghar Rehaish',
+    sector: 'Building & Marketing',
+    mark: 'meragharrehaish',
+    summary: 'A building and marketing company that turns a client\'s vision into a finished home, from construction through to sale.',
+    services: ['Building and construction', 'Property marketing', 'Client advisory'],
+  },
+  {
+    id: 'rehaish',
+    name: 'Rehaish',
+    sector: 'Real Estate & Marketing',
+    mark: 'rehaish',
+    summary: 'A real estate and marketing company helping buyers, sellers and investors find the right property in Karachi.',
+    services: ['Property sales and purchase', 'Real estate marketing', 'Investment guidance'],
+  },
 ];
 
 // Developers that Al Waheed Group represents as an authorized dealer
@@ -112,6 +138,7 @@ export const dealerships = [
     id: 'al-ghafoor',
     name: 'Al Ghafoor Builders & Developers',
     period: '2022 to 2023',
+    logo: ['/assets/img/brand/al-ghafoor-logo.webp', 422, 106],
     text: 'Al Waheed Group worked as an authorized dealer for Al Ghafoor Builders & Developers, guiding buyers through bookings, documentation and installment plans.',
   },
 ];

@@ -192,6 +192,9 @@ export function companyMark(c) {
     case 'hk': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/hk-builders-logo.webp" width="440" height="153" alt="" loading="lazy">`;
     case 'umg': return `<img class="mark__logo" src="/assets/img/brand/umg-logo.webp" width="193" height="180" alt="" loading="lazy">`;
     case 'alghaffar': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/al-ghaffar-logo.webp" width="500" height="400" alt="" loading="lazy">`;
+    case 'alghafoor': return `<img class="mark__logo" src="/assets/img/brand/al-ghafoor-logo.webp" width="422" height="106" alt="" loading="lazy">`;
+    case 'meragharrehaish': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/mera-ghar-rehaish-logo.webp" width="239" height="300" alt="" loading="lazy">`;
+    case 'rehaish': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/rehaish-logo.webp" width="299" height="400" alt="" loading="lazy">`;
     default: return `<span class="mark mark--mono" aria-hidden="true">${c.name.split(' ').filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('')}</span>`;
   }
 }

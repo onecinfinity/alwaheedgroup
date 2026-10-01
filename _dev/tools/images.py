@@ -164,18 +164,26 @@ def white_to_alpha(im):
 
 
 # Group company logos delivered as gold artwork on dark round badges:
-# name -> (file, gold deepening factor, (radius kept in the lower half, lowest row kept), both as shares of the ring radius)
+# name -> (file, gold deepening factor, ring trim, bottom cut)
+#   ring trim: (radius kept in the lower half, lowest row kept) as shares of the ring radius, or None for logos without a ring
+#   bottom cut: share of the image height to keep (drops a tagline that is unreadable at logo size), or None
 GOLD_LOGOS = {
-    'hk-builders-logo': ('hk-builders.jpg', 0.82, (0.9, 1)),
-    'falaknaz-logo': ('falaknaz.jpg', 0.7, (0.9, 1)),
+    'hk-builders-logo': ('hk-builders.jpg', 0.82, (0.9, 1), None),
+    'falaknaz-logo': ('falaknaz.jpg', 0.7, (0.9, 1), None),
+    'mera-ghar-rehaish-logo': ('mera-ghar-rehaish.jpg', 0.86, None, 0.797),
 }
 
 
 def gold_logos():
     """Lift gold artwork off a dark (even textured) background into a transparent image."""
     import cv2
-    for name, (fname, deepen, lower) in GOLD_LOGOS.items():
+    for name, (fname, deepen, lower, bottom) in GOLD_LOGOS.items():
         bgr = cv2.imread(str(BRAND / 'partners' / fname))
+        if bottom:
+            bgr = bgr[:int(bgr.shape[0] * bottom)]
+        if max(bgr.shape[:2]) > 1000:  # large files: keying is much faster and just as clean at 1000 px
+            k = 1000 / max(bgr.shape[:2])
+            bgr = cv2.resize(bgr, None, fx=k, fy=k, interpolation=cv2.INTER_AREA)
         img = bgr[:, :, ::-1].astype(np.float32)
         weights = np.array([0.3, 0.59, 0.11], np.float32)
         lum = img @ weights
@@ -184,18 +192,43 @@ def gold_logos():
         bg = cv2.GaussianBlur(cv2.inpaint(bgr, art, 9, cv2.INPAINT_TELEA), (0, 0), 6)[:, :, ::-1].astype(np.float32)
         a = np.clip((lum - bg @ weights - 14) / 95, 0, 1)
         rgb = (img - bg * (1 - a[..., None])) / np.maximum(a[..., None], 1e-3) * deepen
-        # drop the outer ring of the badge so the artwork itself fills the space
-        ys, xs = np.nonzero(a > 0.3)  # the ring is the outermost artwork, so its box locates it
-        cy, cx = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
-        ring_r = min(ys.max() - ys.min(), xs.max() - xs.min()) / 2
-        yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
-        limit = np.where(yy < cy, 0.9, lower[0]) * ring_r
-        a = np.where((np.hypot(yy - cy, xx - cx) < limit) & (yy < cy + lower[1] * ring_r), a, 0)
+        if lower:
+            # drop the outer ring of the badge so the artwork itself fills the space
+            ys, xs = np.nonzero(a > 0.3)  # the ring is the outermost artwork, so its box locates it
+            cy, cx = (ys.min() + ys.max()) / 2, (xs.min() + xs.max()) / 2
+            ring_r = min(ys.max() - ys.min(), xs.max() - xs.min()) / 2
+            yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+            limit = np.where(yy < cy, 0.9, lower[0]) * ring_r
+            a = np.where((np.hypot(yy - cy, xx - cx) < limit) & (yy < cy + lower[1] * ring_r), a, 0)
         im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), a * 255]).astype(np.uint8), 'RGBA')
         im = im.crop(im.getbbox())
         im.thumbnail((440, 300), Image.LANCZOS)
         im.save(OUT / 'brand' / f'{name}.webp', 'WEBP', quality=90, method=6)
         print('logo', name, im.size)
+
+
+def other_logos():
+    """Al Ghafoor Group (colour logo on pale textured paper) and Rehaish (transparent PNG with a white subtitle)."""
+    # Al Ghafoor: key out the paper and its faint watermark, keep the red, black and gold artwork
+    img = np.asarray(Image.open(BRAND / 'partners' / 'al-ghafoor-group.jpg').convert('RGB')).astype(np.float32)
+    bg = np.median(img.reshape(-1, 3), axis=0)
+    dist = np.sqrt(((img - bg) ** 2).sum(axis=2))
+    a = np.clip((dist - 34) / 45, 0, 1)
+    ys, xs = np.nonzero(a > 0.85)  # the solid artwork locates the logo; stray watermark specks do not
+    box = (max(xs.min() - 6, 0), max(ys.min() - 6, 0), xs.max() + 7, ys.max() + 7)
+    rgb = (img - bg * (1 - a[..., None])) / np.maximum(a[..., None], 1e-3)
+    im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), a * 255]).astype(np.uint8), 'RGBA').crop(box)
+    im.save(OUT / 'brand' / 'al-ghafoor-logo.webp', 'WEBP', quality=92, method=6)
+    print('logo al-ghafoor-logo', im.size)
+    # Rehaish: the white "Real Estate & Marketing" line is invisible on light cards, so tint it gold
+    px = np.asarray(Image.open(BRAND / 'partners' / 'rehaish.png').convert('RGBA')).copy()
+    white = (px[..., 3] > 40) & (px[..., :3].min(axis=2) > 200)
+    px[white, :3] = (138, 106, 44)
+    im = Image.fromarray(px, 'RGBA')
+    im = im.crop(im.getbbox())
+    im.thumbnail((400, 400), Image.LANCZOS)
+    im.save(OUT / 'brand' / 'rehaish-logo.webp', 'WEBP', quality=92, method=6)
+    print('logo rehaish-logo', im.size)
 
 
 def partner_logos():
@@ -273,6 +306,7 @@ if __name__ == '__main__':
     map_logos()
     partner_logos()
     gold_logos()
+    other_logos()
     for key, img in portraits.render_all():
         add(manifest, key, img, [360, 720], q_avif=58, q_webp=80)
     MANIFEST.write_text(json.dumps(manifest, indent=1), encoding='utf-8')

@@ -15,6 +15,7 @@ const kh = projects.find((x) => x.slug === 'khairunnisa-heights');
 const years = new Date().getFullYear() - site.foundingYear;
 const check = (t) => `<li>${icon('check', '', 18)}<span>${t}</span></li>`;
 const rs = (n) => n.toLocaleString('en-US');
+const groupCount = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'][companies.length] || String(companies.length);
 const fileSize = (p) => {
   try { return `${Math.round(fs.statSync(new URL(`../..${p}`, import.meta.url)).size / 1024)} KB`; } catch { return ''; }
 };
@@ -97,7 +98,7 @@ ${sectionHead({ eyebrow: 'About Us', title: 'A Legacy of Trust &amp; Excellence'
 
 <section class="section section--ivory" aria-labelledby="companies-title">
 <div class="container">
-${sectionHead({ eyebrow: 'Affiliated Groups', title: 'A Diverse Portfolio, One Shared Vision', sub: 'Five groups working together across development, construction and marketing.', center: true, id: 'companies-title' })}
+${sectionHead({ eyebrow: 'Affiliated Groups', title: 'A Diverse Portfolio, One Shared Vision', sub: `${groupCount} groups working together across development, construction and marketing.`, center: true, id: 'companies-title' })}
 <div class="company-grid" data-stagger>${companies.map((c) => companyCard(c)).join('')}</div>
 <p class="dealer-line" data-reveal>${icon('award', '', 20)}<span><strong>Authorized dealer</strong> for ${dealerships.map((d) => d.name).join(' and ')}.</span><a class="link" href="/affiliated-groups/#dealerships">Learn more ${icon('arrow', '', 16)}</a></p>
 </div>
@@ -318,7 +319,7 @@ ${ctaBand()}`;
 /* ============ COMPANIES ============ */
 function companiesPage() {
   const body = `
-${pageHero({ image: 'united-palm-greens/r8', alt: 'Residential towers at United Palm Greens, developed by Al Waheed Group', eyebrow: 'Our Network', title: 'Affiliated Groups', lead: 'Five groups, one shared vision: building better lives through real estate development, construction and marketing.', crumbs: [['Affiliated Groups', '/affiliated-groups/']] })}
+${pageHero({ image: 'united-palm-greens/r8', alt: 'Residential towers at United Palm Greens, developed by Al Waheed Group', eyebrow: 'Our Network', title: 'Affiliated Groups', lead: `${groupCount} groups, one shared vision: building better lives through real estate development, construction and marketing.`, crumbs: [['Affiliated Groups', '/affiliated-groups/']] })}
 <section class="section" aria-labelledby="port-title">
 <div class="container">
 ${sectionHead({ eyebrow: 'Affiliated Groups', title: 'Working Together From Land to Handover', sub: 'Each group focuses on one part of the property journey, so clients get specialist care at every step.', center: true, id: 'port-title' })}
@@ -350,7 +351,7 @@ ${ctaBand()}`;
   return {
     path: '/affiliated-groups/', crumbs: [['Affiliated Groups', '/affiliated-groups/']],
     title: 'Affiliated Groups | Al Waheed Group of Companies',
-    description: 'Al Waheed Group affiliated groups: Al Waheed Builders and Developers, HK Builders and Developers, Al Ghaffar Group, Jinnah Real Estate and Builders and UMG.',
+    description: 'Al Waheed Group affiliated groups: Al Waheed Builders and Developers, HK Builders, Al Ghaffar Group, Al Ghafoor Group, Rehaish, UMG and more.',
     body,
   };
 }
