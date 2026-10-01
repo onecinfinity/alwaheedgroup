@@ -46,7 +46,7 @@ export const stats = [
   { value: new Date().getFullYear() - 2016, suffix: '+', label: 'Years of Experience' },
   { value: 5, suffix: '', label: 'Projects & Ventures' },
   { value: 3500, suffix: '+', label: 'Families Served' }, // PLACEHOLDER
-  { value: 8, suffix: '', label: 'Affiliated Groups' },
+  { get value() { return companies.length; }, suffix: '', label: 'Affiliated Groups' },
 ];
 
 // Affiliated groups shown on the site. `sub: true` marks companies that are part of Al Waheed Group itself.
@@ -78,15 +78,6 @@ export const companies = [
     summary: 'The developer of Khairunnisa Heights, a high rise apartment project on Main Scheme 33 Road, Karachi, proudly sponsored by Al Waheed Group.',
     services: ['High rise residential projects', 'Apartment development', 'Project planning and delivery'],
     link: ['/projects/khairunnisa-heights/', 'View Khairunnisa Heights'],
-  },
-  {
-    id: 'jinnah-real-estate',
-    name: 'Jinnah Real Estate and Builders',
-    sector: 'Real Estate & Construction',
-    mark: 'jinnah',
-    // PLACEHOLDER description and services: confirm with the client
-    summary: 'A real estate and building company affiliated with Al Waheed Group, helping buyers, sellers and investors across Karachi.',
-    services: ['Property sales and purchase', 'Building and construction', 'Investment advisory'],
   },
   {
     id: 'umg',
