@@ -237,6 +237,7 @@ export const projects = [
     faqs: [
       ['Where is United Palm Greens located?', 'United Palm Greens is on the Main 400 ft Wide Road in Scheme 43, Survey No. 416, Deh Jam Chakro, Karachi, beside Silk Garden by Naya Nazimabad.'],
       ['What plot sizes are available in United Palm Greens?', 'Plots are offered in 120, 400 and 2,000 square yard sizes across Blocks A, A-1, B and B-1, with separate commercial plots at the entrance.'],
+      ['How much do I need to book a plot at United Palm Greens?', 'Booking starts from Rs. 600,000. The balance is paid in monthly and half yearly installments, and the full payment schedule can be downloaded on this page.'],
       ['What is the payment plan for a 120 square yard plot?', 'Rs. 1,000,000 on booking, Rs. 300,000 on confirmation, Rs. 300,000 on allocation, 36 monthly installments of Rs. 45,000, 6 half yearly installments and Rs. 1,000,000 on possession. The total cash price is Rs. 6,000,000.'],
       ['Are there extra charges for corner or park facing plots?', 'Yes. Corner, West Open and Single Belt plots carry Rs. 500,000 extra, and Park Facing or Road Facing plots carry Rs. 250,000 extra, payable within 180 days of booking.'],
       ['Who is the developer of United Palm Greens?', 'United Palm Greens is developed by Al Waheed Builders & Developers and marketed by United Marketing Group, both part of Al Waheed Group.'],
@@ -424,7 +425,7 @@ export const testimonials = [
 export const homeFaqs = [
   ['Where are Al Waheed Group projects located?', 'United Palm Greens is on the Main 400 ft Wide Road in Scheme 43, Karachi, beside Silk Garden by Naya Nazimabad. Khairunnisa Heights, which we sponsor, is on Main Scheme 33 Road, Punjabi Sodagran, Karachi.'],
   ['What apartments are available at Khairunnisa Heights?', 'Khairunnisa Heights offers Ruby and Opal 4 room apartments and Diamond 5 room apartments, on a plan of two down payments, 24 monthly and 4 half yearly installments and a payment on possession.'],
-  ['What is the payment plan for United Palm Greens?', 'A 120 square yard plot is booked with Rs. 1,000,000, followed by payments on confirmation and allocation, 36 monthly and 6 half yearly installments, and Rs. 1,000,000 on possession. You can download the full payment schedule on the project page.'],
+  ['What is the payment plan for United Palm Greens?', 'Booking starts from Rs. 600,000, and the balance is paid in easy monthly and half yearly installments. You can view and download the full payment schedule on the project page.'],
   ['Can overseas Pakistanis book a plot remotely?', 'Yes. We handle the full booking remotely, with virtual site tours, digital documentation and an advisor available on WhatsApp across time zones.'],
   ['What plot sizes are available?', 'United Palm Greens offers residential plots of 120, 400 and 2,000 square yards, plus commercial plots at the entrance.'],
   ['How do I book a site visit?', 'Book a free consultation through this website, call us or send a WhatsApp message. Our team will arrange a guided site visit at a time that suits you.'],

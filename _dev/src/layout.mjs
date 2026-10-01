@@ -178,7 +178,7 @@ export function projectCard(p, { sizes = '(min-width: 1100px) 290px, (min-width:
 <p class="project-card__role">${p.role}</p>
 <h${headingLevel} class="project-card__title">${p.name}</h${headingLevel}>
 <p class="project-card__loc">${icon('pin', '', 16)}${p.place}</p>
-<ul class="project-card__facts"><li>${p.plotsShort}</li><li>${p.type}</li></ul>
+<ul class="project-card__facts"><li>${p.plotsShort}</li><li>${p.type}</li>${p.bookingFrom ? `<li class="is-key">Booking from Rs. ${p.bookingFrom.toLocaleString('en-US')}</li>` : ''}</ul>
 <span class="project-card__cta">View Project ${icon('arrow', '', 18)}</span>
 </div>
 </a>

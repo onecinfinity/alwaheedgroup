@@ -84,7 +84,7 @@ write('llms.txt', `# ${site.name}
 - [Board of Directors](${abs('/board-of-directors/')}): ${board.map((b) => `${b.name} (${b.title})`).join(', ')}
 - [Affiliated Groups](${abs('/affiliated-groups/')}): ${companies.map((c) => c.name).join(', ')}; authorized dealer for ${dealerships.map((d) => d.name).join(' and ')}
 - [Projects](${abs('/projects/')}): ${projects.map((p) => p.name).join(', ')}, and upcoming ${upcoming.map((u) => u.name).join(', ')}
-${projects.map((p) => `- [${p.name}](${abs(`/projects/${p.slug}/`)}): ${p.type}, ${p.role.toLowerCase()}, in ${p.location}. ${p.plots ? `Plots: ${p.plots}` : `Units: ${p.units.map((u) => `${u.name} (${u.rooms}, Rs. ${u.total.toLocaleString('en-US')})`).join(', ')}`}. Payment: ${p.payment}.`).join('\n')}
+${projects.map((p) => `- [${p.name}](${abs(`/projects/${p.slug}/`)}): ${p.type}, ${p.role.toLowerCase()}, in ${p.location}. ${p.plots ? `Plots: ${p.plots}` : `Units: ${p.units.map((u) => `${u.name} (${u.rooms}, Rs. ${u.total.toLocaleString('en-US')})`).join(', ')}`}. ${p.bookingFrom ? `Booking from Rs. ${p.bookingFrom.toLocaleString('en-US')}. ` : ''}Payment: ${p.payment}.`).join('\n')}
 - [${downloads.paymentSchedule.title} (PDF)](${abs(downloads.paymentSchedule.file)}): United Palm Greens, ${downloads.paymentSchedule.detail}
 - [${downloads.layoutPlan.title} (PDF)](${abs(downloads.layoutPlan.file)}): United Palm Greens, ${downloads.layoutPlan.detail}
 - [${downloads.khairunnisa.title} (PDF)](${abs(downloads.khairunnisa.file)}): Khairunnisa Heights, ${downloads.khairunnisa.detail}

@@ -311,6 +311,7 @@ body.menu-open { overflow: hidden; }
 .project-card__loc .icon { color: var(--gold); }
 .project-card__facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 20px; }
 .project-card__facts li { padding: 5px 10px; font-size: .75rem; color: var(--ink); background: var(--ivory); }
+.project-card__facts .is-key { font-weight: 600; color: var(--gold-deep); background: none; border: 1px solid var(--gold); }
 .project-card__cta { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--sand); font: 600 .75rem/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gold-deep); }
 .project-card__cta .icon { transition: transform .25s var(--ease); }
 .project-card:hover .project-card__cta .icon { transform: translateX(4px); }
