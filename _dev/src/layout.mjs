@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { site, companies, dealerships, projects, upcoming } from './data.mjs';
+import { site, companies, projects, upcoming } from './data.mjs';
 import { icon } from './icons.mjs';
 
 const manifest = JSON.parse(fs.readFileSync(new URL('./images.json', import.meta.url), 'utf8'));
@@ -193,6 +193,8 @@ export function companyMark(c) {
     case 'umg': return `<img class="mark__logo" src="/assets/img/brand/umg-logo.webp" width="193" height="180" alt="" loading="lazy">`;
     case 'alghaffar': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/al-ghaffar-logo.webp" width="500" height="400" alt="" loading="lazy">`;
     case 'alghafoor': return `<img class="mark__logo" src="/assets/img/brand/al-ghafoor-logo.webp" width="422" height="106" alt="" loading="lazy">`;
+    case 'falaknaz': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/falaknaz-logo.webp" width="350" height="244" alt="" loading="lazy">`;
+    case 'meraghar': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/mera-ghar-logo.webp" width="225" height="268" alt="" loading="lazy">`;
     case 'meragharrehaish': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/mera-ghar-rehaish-logo.webp" width="239" height="300" alt="" loading="lazy">`;
     case 'rehaish': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/rehaish-logo.webp" width="299" height="400" alt="" loading="lazy">`;
     default: return `<span class="mark mark--mono" aria-hidden="true">${c.name.split(' ').filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('')}</span>`;
@@ -206,14 +208,6 @@ export function companyCard(c, level = 3) {
 <span class="company-card__rule" aria-hidden="true"></span>
 <p class="company-card__sector">${c.sector}</p>
 </a>`;
-}
-
-/** "Authorized dealer" cards: developers Al Waheed represents. */
-export function dealerCards(level = 3) {
-  return `<div class="dealers" data-stagger>${dealerships.map((d) => `<article class="dealer" id="${d.id}" data-reveal>
-<div class="dealer__mark">${d.logo ? `<img src="${d.logo[0]}" width="${d.logo[1]}" height="${d.logo[2]}" alt="" loading="lazy">` : `<span class="dealer__word" aria-hidden="true">${d.name.split(' ').slice(0, 2).join(' ')}</span>`}</div>
-<div class="dealer__body"><p class="eyebrow">Authorized Dealer &middot; ${d.period}</p><h${level} class="h3">${d.name}</h${level}><p>${d.text}</p></div>
-</article>`).join('')}</div>`;
 }
 
 /** Team photo (an images.json key such as 'team/abdul-waheed-meo'), or a monogram placeholder. */

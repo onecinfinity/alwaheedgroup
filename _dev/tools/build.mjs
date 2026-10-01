@@ -7,7 +7,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { allPages } from '../src/pages.mjs';
 import { renderPage, abs, TODAY } from '../src/layout.mjs';
-import { site, projects, upcoming, chairman, board, downloads, companies, dealerships } from '../src/data.mjs';
+import { site, projects, upcoming, chairman, board, downloads, companies } from '../src/data.mjs';
 
 const DEV = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.resolve(DEV, '..');
@@ -75,14 +75,14 @@ write('robots.txt', site.launchReady
 
 write('llms.txt', `# ${site.name}
 
-> ${site.name} is a Karachi, Pakistan real estate group founded in ${site.foundingYear} by ${chairman.name}. It works in property development, construction, sales and marketing, and investment. It develops the United Palm Greens gated community, sponsors Khairunnisa Heights (a project by Al Ghaffar Group), was an authorized dealer for Al Ghafoor Builders & Developers (2022 to 2023) and has been an authorized dealer for Falaknaz Group since 2023.
+> ${site.name} is a Karachi, Pakistan real estate group founded in ${site.foundingYear} by ${chairman.name}. It works in property development, construction, sales and marketing, and investment. It develops the United Palm Greens gated community, sponsors Khairunnisa Heights (a project by Al Ghaffar Group), was an authorized dealer for Al Ghafoor Group (2022 to 2023) and has been an authorized dealer for Falaknaz Group since 2023.
 
 ## Key pages
 - [Home](${abs('/')}): overview, projects, leadership and consultation booking
 - [About](${abs('/about/')}): company story, milestones, vision, mission and values
 - [Chairman's Message](${abs('/chairman-message/')}): ${chairman.name}, ${chairman.title}
 - [Board of Directors](${abs('/board-of-directors/')}): ${board.map((b) => `${b.name} (${b.title})`).join(', ')}
-- [Affiliated Groups](${abs('/affiliated-groups/')}): ${companies.map((c) => c.name).join(', ')}; authorized dealer for ${dealerships.map((d) => d.name).join(' and ')}
+- [Affiliated Groups](${abs('/affiliated-groups/')}): ${companies.filter((c) => !c.dealer).map((c) => c.name).join(', ')}; authorized dealer for ${companies.filter((c) => c.dealer).map((c) => c.name).join(' and ')}
 - [Projects](${abs('/projects/')}): ${projects.map((p) => p.name).join(', ')}, and upcoming ${upcoming.map((u) => u.name).join(', ')}
 ${projects.map((p) => `- [${p.name}](${abs(`/projects/${p.slug}/`)}): ${p.type}, ${p.role.toLowerCase()}, in ${p.location}. ${p.plots ? `Plots: ${p.plots}` : `Units: ${p.units.map((u) => `${u.name} (${u.rooms}, Rs. ${u.total.toLocaleString('en-US')})`).join(', ')}`}. ${p.bookingFrom ? `Booking from Rs. ${p.bookingFrom.toLocaleString('en-US')}. ` : ''}Payment: ${p.payment}.`).join('\n')}
 - [${downloads.paymentSchedule.title} (PDF)](${abs(downloads.paymentSchedule.file)}): United Palm Greens, ${downloads.paymentSchedule.detail}

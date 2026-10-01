@@ -170,6 +170,7 @@ def white_to_alpha(im):
 GOLD_LOGOS = {
     'hk-builders-logo': ('hk-builders.jpg', 0.82, (0.9, 1), None),
     'falaknaz-logo': ('falaknaz.jpg', 0.7, (0.9, 1), None),
+    'mera-ghar-logo': ('mera-ghar.jpg', 0.92, (0.8, 0.66), None),
     'mera-ghar-rehaish-logo': ('mera-ghar-rehaish.jpg', 0.86, None, 0.797),
 }
 

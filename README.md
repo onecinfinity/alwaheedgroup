@@ -55,7 +55,7 @@ To preview locally: `python -m http.server 8765`, then open http://localhost:876
 ## Projects
 
 - `projects` in `_dev/src/data.mjs`: **United Palm Greens** (developed by Al Waheed) and **Khairunnisa Heights** (by Al Ghaffar Group, sponsored by Al Waheed). A project with `units` gets the apartment page with Ruby / Opal / Diamond tabs, floor plans and payment tables.
-- `companies`: the **Affiliated Groups** (page `/affiliated-groups/`). Their logos are prepared in `_dev/tools/images.py` (`GOLD_LOGOS`, `other_logos`) from the files in `_dev/assets/brand/partners/`. `dealerships`: the developers Al Waheed represents as an authorized dealer (Falaknaz Group, Al Ghafoor Builders & Developers).
+- `companies`: the **Affiliated Groups** (page `/affiliated-groups/`). Their logos are prepared in `_dev/tools/images.py` (`GOLD_LOGOS`, `other_logos`) from the files in `_dev/assets/brand/partners/`. Entries with `dealer: true` (Falaknaz Group, Al Ghafoor Group) are the developers Al Waheed represents as an authorized dealer; their cards carry the "Authorized Dealer" label.
 - `upcoming`: **United Sky View, United Greens, United Lodges**, shown as blurred cards with a rotating "Coming Soon" seal. To use a real teaser render, point its entry in `TEASERS` (`_dev/tools/images.py`) at the file; it is blurred automatically. When a project launches, move it into `projects` and it gets its own page.
 
 ## Before going live
