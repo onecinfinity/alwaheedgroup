@@ -90,14 +90,6 @@ export const companies = [
   },
   // PLACEHOLDER descriptions and services for the groups below: confirm with the client
   {
-    id: 'mera-ghar',
-    name: 'Mera Ghar',
-    sector: 'Property Consultancy',
-    mark: 'meraghar',
-    summary: 'A property consultancy that helps first time buyers find the right plot or home, plan their budget and complete their paperwork with confidence.',
-    services: ['Property search and advisory', 'Documentation support', 'Resale and rental assistance'],
-  },
-  {
     id: 'mera-ghar-rehaish',
     name: 'Mera Ghar Rehaish',
     sector: 'Building & Marketing',
@@ -106,30 +98,30 @@ export const companies = [
     services: ['Building and construction', 'Property marketing', 'Client advisory'],
   },
   {
-    id: 'rehaish',
-    name: 'Rehaish',
-    sector: 'Real Estate & Marketing',
-    mark: 'rehaish',
-    summary: 'A real estate and marketing company helping buyers, sellers and investors find the right property in Karachi.',
-    services: ['Property sales and purchase', 'Real estate marketing', 'Investment guidance'],
+    id: 'jrb-group',
+    name: 'JRB Group of Companies',
+    sector: 'Real Estate & Construction',
+    mark: 'jrb',
+    summary: 'A real estate and building group affiliated with Al Waheed Group, guiding buyers, sellers and investors on the journey from dreams to reality.',
+    services: ['Property sales and purchase', 'Building and construction', 'Investment advisory'],
   },
-  // `dealer: true` marks developers that Al Waheed Group represents as an authorized dealer
+  // `partner: true` marks the business partners of Al Waheed Group
   {
     id: 'falaknaz-group',
     name: 'Falaknaz Group',
-    sector: 'Authorized Dealer',
+    sector: 'Business Partner',
     mark: 'falaknaz',
-    dealer: true,
-    summary: 'Al Waheed Group has been an authorized dealer of Falaknaz Group since 2023, helping families and investors book Falaknaz projects with guided site visits and after sales support.',
+    partner: true,
+    summary: 'A business partner of Al Waheed Group since 2023. Together we help families and investors book Falaknaz projects with guided site visits and after sales support.',
     services: ['Bookings in Falaknaz projects', 'Guided site visits', 'After sales and transfer support'],
   },
   {
     id: 'al-ghafoor-group',
     name: 'Al Ghafoor Group',
-    sector: 'Authorized Dealer',
+    sector: 'Business Partner',
     mark: 'alghafoor',
-    dealer: true,
-    summary: 'An established Karachi real estate group. Al Waheed Group became its authorized dealer in 2022, guiding buyers through bookings, documentation and installment plans.',
+    partner: true,
+    summary: 'An established Karachi real estate group and a business partner of Al Waheed Group since 2022, working together on bookings, documentation and installment plans for buyers.',
     services: ['Bookings in Al Ghafoor projects', 'Documentation support', 'Installment plan guidance'],
   },
 ];
@@ -390,7 +382,7 @@ export const reasons = [
   ['wallet', 'Flexible Installments', 'Low booking amounts with monthly and half yearly installments, designed around real family budgets.'],
   ['pin', 'Prime Karachi Locations', 'Projects on main roads, from the 400 ft wide road in Scheme 43 to Main Scheme 33 Road, with quick access to the rest of the city.'],
   ['layers', 'Quality Construction', 'Engineered infrastructure, planned road widths and landscaped green belts, inspected at every stage.'],
-  ['award', 'Proven Dealership Record', 'Years as an authorized dealer for Al Ghafoor Group and Falaknaz Group before building our own.'],
+  ['award', 'Trusted Business Partners', 'Years of partnership with Al Ghafoor Group and Falaknaz Group before building our own.'],
   ['headset', 'After Sales Support', 'One advisor stays with you from booking to possession and answers when you call.'],
 ];
 
@@ -403,12 +395,12 @@ export const chairman = {
   vision: 'To make Al Waheed one of Karachi\'s most trusted names in real estate, where every family buys with confidence.',
   message: [
     'When I founded Al Waheed Group in 2016, Karachi\'s property market was full of opportunity but short on trust. Too many families had lost their savings to unclear files and promises that were never kept. I wanted to build a company that people could rely on, one where every deal is explained in plain words and every commitment is honoured.',
-    'We learned this business from the ground up. From 2022 to 2023 we worked as an authorized dealer for Al Ghafoor Group, and since 2023 we have been an authorized dealer for Falaknaz Group. Serving families and investors through these partnerships taught us what buyers really need: fair prices, flexible installments, transparent documentation and a team that still picks up the phone after the sale.',
+    'We learned this business from the ground up. We partnered with Al Ghafoor Group in 2022 and with Falaknaz Group in 2023. Serving families and investors through these partnerships taught us what buyers really need: fair prices, flexible installments, transparent documentation and a team that still picks up the phone after the sale.',
     'In 2026 we took the next step and launched our own development, United Palm Greens in Scheme 43, Karachi. It is a gated community planned around what our clients told us matters most: a Jamia Masjid, an education center, parks and a playground, wide roads and round the clock security, all within walking distance of home.',
     'My vision for Al Waheed Group is to become one of Karachi\'s most trusted names in real estate, known not only for what we build but for how honestly we deal. Alongside our own development we are proud to sponsor Khairunnisa Heights by Al Ghaffar Group, and we are preparing three new projects: United Sky View, United Greens and United Lodges.',
     'For me, leadership means accountability. Our doors are open, our numbers are clear and our word is our bond. To every family and investor who has trusted us, thank you. Together, we will keep building better lives.',
   ],
-  bio: 'Founded Al Waheed Group in 2016. Built the group\'s reputation as an authorized dealer for Al Ghafoor Group (2022 to 2023) and Falaknaz Group (2023 to present), and now leads its first own development, United Palm Greens.',
+  bio: 'Founded Al Waheed Group in 2016. Built the group\'s reputation through business partnerships with Al Ghafoor Group (from 2022) and Falaknaz Group (from 2023), and now leads its first own development, United Palm Greens.',
 };
 
 export const board = [
@@ -447,13 +439,13 @@ export const homeFaqs = [
   ['Can overseas Pakistanis book a plot remotely?', 'Yes. We handle the full booking remotely, with virtual site tours, digital documentation and an advisor available on WhatsApp across time zones.'],
   ['What plot sizes are available?', 'United Palm Greens offers residential plots of 120, 400 and 2,000 square yards, plus commercial plots at the entrance.'],
   ['How do I book a site visit?', 'Book a free consultation through this website, call us or send a WhatsApp message. Our team will arrange a guided site visit at a time that suits you.'],
-  ['Is Al Waheed Group an authorized dealer?', 'Yes. Al Waheed Group was an authorized dealer for Al Ghafoor Group from 2022 to 2023 and has been an authorized dealer for Falaknaz Group since 2023.'],
+  ['Who are the business partners of Al Waheed Group?', 'Al Ghafoor Group and Falaknaz Group are business partners of Al Waheed Group. The partnership with Al Ghafoor Group began in 2022 and the partnership with Falaknaz Group in 2023.'],
 ];
 
 export const milestones = [
   ['2016', 'Al Waheed Group Founded', 'Abdul Waheed Meo founds the group in Karachi with a promise of honest, transparent real estate.'],
-  ['2022', 'Al Ghafoor Group', 'Al Waheed becomes an authorized dealer for Al Ghafoor Group, until 2023.'],
-  ['2023', 'Falaknaz Group', 'Authorized dealership with Falaknaz Group begins and continues today.'],
+  ['2022', 'Al Ghafoor Group', 'Al Waheed becomes a business partner of Al Ghafoor Group.'],
+  ['2023', 'Falaknaz Group', 'Business partnership with Falaknaz Group begins and continues today.'],
   ['2026', 'United Palm Greens', 'Launch of the group\'s first own development in Scheme 43, Karachi.'],
   ['Now', 'Khairunnisa Heights', 'Al Waheed Group sponsors Khairunnisa Heights, a high rise apartment project by Al Ghaffar Group.'],
   ['Next', 'Three New Projects', 'United Sky View, United Greens and United Lodges are in the pipeline.'],

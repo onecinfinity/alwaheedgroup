@@ -170,7 +170,6 @@ def white_to_alpha(im):
 GOLD_LOGOS = {
     'hk-builders-logo': ('hk-builders.jpg', 0.82, (0.9, 1), None),
     'falaknaz-logo': ('falaknaz.jpg', 0.7, (0.9, 1), None),
-    'mera-ghar-logo': ('mera-ghar.jpg', 0.92, (0.8, 0.66), None),
     'mera-ghar-rehaish-logo': ('mera-ghar-rehaish.jpg', 0.86, None, 0.797),
 }
 
@@ -209,7 +208,8 @@ def gold_logos():
 
 
 def other_logos():
-    """Al Ghafoor Group (colour logo on pale textured paper) and Rehaish (transparent PNG with a white subtitle)."""
+    """Al Ghafoor Group (colour logo on pale textured paper) and JRB Group (red badge and wordmark on white)."""
+    import cv2
     # Al Ghafoor: key out the paper and its faint watermark, keep the red, black and gold artwork
     img = np.asarray(Image.open(BRAND / 'partners' / 'al-ghafoor-group.jpg').convert('RGB')).astype(np.float32)
     bg = np.median(img.reshape(-1, 3), axis=0)
@@ -221,15 +221,22 @@ def other_logos():
     im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), a * 255]).astype(np.uint8), 'RGBA').crop(box)
     im.save(OUT / 'brand' / 'al-ghafoor-logo.webp', 'WEBP', quality=92, method=6)
     print('logo al-ghafoor-logo', im.size)
-    # Rehaish: the white "Real Estate & Marketing" line is invisible on light cards, so tint it gold
-    px = np.asarray(Image.open(BRAND / 'partners' / 'rehaish.png').convert('RGBA')).copy()
-    white = (px[..., 3] > 40) & (px[..., :3].min(axis=2) > 200)
-    px[white, :3] = (138, 106, 44)
-    im = Image.fromarray(px, 'RGBA')
+    # JRB Group: clear the white card around the artwork, but keep the white that belongs inside the round badge
+    img = np.asarray(Image.open(BRAND / 'partners' / 'jrb-group.jpg').convert('RGB')).astype(np.float32)
+    a = np.clip((255 - img).max(axis=2) / 255, 0, 1)
+    a = np.where(a < 0.06, 0, a)
+    rgb = 255 - (255 - img) / np.maximum(a[..., None], 1e-3)
+    shapes, _ = cv2.findContours((a > 0.5).astype(np.uint8), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+    badge = np.zeros(a.shape, np.uint8)
+    cv2.drawContours(badge, [max(shapes, key=cv2.contourArea)], -1, 1, cv2.FILLED)  # the badge is the largest solid shape
+    badge = cv2.erode(badge, np.ones((5, 5), np.uint8)).astype(bool)  # its soft outer edge stays keyed
+    a = np.where(badge, 1, a)
+    rgb = np.where(badge[..., None], img, rgb)
+    im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), a * 255]).astype(np.uint8), 'RGBA')
     im = im.crop(im.getbbox())
-    im.thumbnail((400, 400), Image.LANCZOS)
-    im.save(OUT / 'brand' / 'rehaish-logo.webp', 'WEBP', quality=92, method=6)
-    print('logo rehaish-logo', im.size)
+    im.thumbnail((480, 300), Image.LANCZOS)
+    im.save(OUT / 'brand' / 'jrb-logo.webp', 'WEBP', quality=92, method=6)
+    print('logo jrb-logo', im.size)
 
 
 def partner_logos():

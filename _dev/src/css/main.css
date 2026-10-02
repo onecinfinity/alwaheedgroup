@@ -254,12 +254,11 @@ body.menu-open { overflow: hidden; }
 .co-row__mark .mark__logo { max-width: 80%; max-height: 110px; }
 @media (max-width: 699px) { .company-card { padding: 22px 10px 20px; } .company-card__rule { margin: 10px 0; } }
 @media (min-width: 700px) {
-  .company-grid { --cols: 3; --gap: 16px; }
+  .company-grid { --cols: 4; --gap: 16px; }
   .company-card__mark { height: 72px; margin-bottom: 18px; }
   .company-card__mark .mark--umg { font-size: 2.5rem; }
   .company-card__mark .mark__img, .company-card__mark .mark--icon svg { width: 64px; height: 64px; }
 }
-@media (min-width: 1000px) { .company-grid { --cols: 5; } }
 @media (min-width: 1180px) { .company-grid { --gap: 20px; } }
 
 .co-list { display: grid; gap: 20px; }

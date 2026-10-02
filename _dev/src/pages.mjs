@@ -87,8 +87,8 @@ function home() {
 <div class="split__text">
 ${sectionHead({ eyebrow: 'About Us', title: 'A Legacy of Trust &amp; Excellence', id: 'about-title' })}
 <p data-reveal>Founded in ${site.foundingYear} by ${chairman.name}, ${site.name} is a Karachi business group working across real estate development, construction, sales, marketing and investment. For ${years} years we have helped families and investors buy property with confidence.</p>
-<p data-reveal>We earned our name as an authorized dealer for Al Ghafoor Group and Falaknaz Group. Today we build our own, United Palm Greens in Scheme 43, and proudly sponsor Khairunnisa Heights in Scheme 33.</p>
-<ul class="checks" data-reveal>${check('Clear documentation on every booking')}${check('Authorized dealer for Falaknaz Group since 2023')}${check('One advisor from booking to possession')}</ul>
+<p data-reveal>We earned our name working alongside our business partners, Al Ghafoor Group and Falaknaz Group. Today we build our own, United Palm Greens in Scheme 43, and proudly sponsor Khairunnisa Heights in Scheme 33.</p>
+<ul class="checks" data-reveal>${check('Clear documentation on every booking')}${check('Business partner of Falaknaz Group and Al Ghafoor Group')}${check('One advisor from booking to possession')}</ul>
 <div data-reveal>${btn('/about/', 'Our Story', 'outline')}</div>
 </div>
 <div class="split__media framed" data-reveal>${pic('brand/logo-in-wall', { alt: 'Al Waheed emblem on the wall of the group office', sizes: '(min-width: 1000px) 560px, 92vw' })}
@@ -98,7 +98,7 @@ ${sectionHead({ eyebrow: 'About Us', title: 'A Legacy of Trust &amp; Excellence'
 
 <section class="section section--ivory" aria-labelledby="companies-title">
 <div class="container">
-${sectionHead({ eyebrow: 'Affiliated Groups', title: 'A Diverse Portfolio, One Shared Vision', sub: `${groupCount} groups working together across development, construction, marketing and authorized dealerships.`, center: true, id: 'companies-title' })}
+${sectionHead({ eyebrow: 'Affiliated Groups', title: 'A Diverse Portfolio, One Shared Vision', sub: `${groupCount} groups working together across development, construction and marketing.`, center: true, id: 'companies-title' })}
 <div class="company-grid" data-stagger>${companies.map((c) => companyCard(c)).join('')}</div>
 </div>
 </section>
@@ -206,7 +206,7 @@ ${pageHero({ image: 'united-palm-greens/r1', alt: 'Aerial view of United Palm Gr
 <div class="split__text">
 ${sectionHead({ eyebrow: 'Our Story', title: 'From Trusted Dealer to Developer', id: 'story-title' })}
 <p data-reveal>${chairman.name} founded ${site.name} in ${site.foundingYear} with a clear purpose: to protect buyers from unclear paperwork and broken promises. Families trusted us because we explained every document, every payment and every risk in plain words.</p>
-<p data-reveal>That trust carried us through years of dealership work. From 2022 to 2023 we were an authorized dealer for Al Ghafoor Group, and since 2023 we have been an authorized dealer for Falaknaz Group, helping families and overseas Pakistanis invest in well planned communities.</p>
+<p data-reveal>That trust grew into lasting business partnerships. We partnered with Al Ghafoor Group in 2022 and with Falaknaz Group in 2023, helping families and overseas Pakistanis invest in well planned communities.</p>
 <p data-reveal>In 2026 we launched our own development, United Palm Greens in Scheme 43, Karachi. Today the group and its affiliates cover development, construction, sales and marketing, and we are proud to sponsor Khairunnisa Heights by Al Ghaffar Group while preparing three new projects: United Sky View, United Greens and United Lodges.</p>
 </div>
 <div class="split__media framed" data-reveal>${pic('united-palm-greens/r6', { alt: 'Grand entrance of United Palm Greens in Scheme 43, Karachi', sizes: '(min-width: 1000px) 560px, 92vw' })}</div>
@@ -251,7 +251,7 @@ ${ctaBand()}`;
   return {
     path: '/about/', crumbs: [['About', '/about/']], pageType: 'AboutPage', ogImage: '/assets/img/og/about.jpg',
     title: 'About Al Waheed Group of Companies | Karachi Real Estate',
-    description: 'Founded in 2016 by Abdul Waheed Meo, Al Waheed Group grew from a trusted authorized dealer into the developer of United Palm Greens in Karachi.',
+    description: 'Founded in 2016 by Abdul Waheed Meo, Al Waheed Group grew from a trusted real estate business into the developer of United Palm Greens in Karachi.',
     body,
   };
 }
@@ -321,7 +321,7 @@ function companiesPage() {
 ${pageHero({ image: 'united-palm-greens/r8', alt: 'Residential towers at United Palm Greens, developed by Al Waheed Group', eyebrow: 'Our Network', title: 'Affiliated Groups', lead: `${groupCount} groups, one shared vision: building better lives through real estate development, construction and marketing.`, crumbs: [['Affiliated Groups', '/affiliated-groups/']] })}
 <section class="section" aria-labelledby="port-title">
 <div class="container">
-${sectionHead({ eyebrow: 'Affiliated Groups', title: 'Working Together From Land to Handover', sub: 'Each group focuses on one part of the property journey, so clients get specialist care at every step. We are also an authorized dealer for Falaknaz Group and Al Ghafoor Group.', center: true, id: 'port-title' })}
+${sectionHead({ eyebrow: 'Affiliated Groups', title: 'Working Together From Land to Handover', sub: 'Each group focuses on one part of the property journey, so clients get specialist care at every step. Falaknaz Group and Al Ghafoor Group are our business partners.', center: true, id: 'port-title' })}
 <div class="company-grid" data-stagger>${companies.map((c) => companyCard(c)).join('')}</div>
 </div>
 </section>
@@ -344,7 +344,7 @@ ${ctaBand()}`;
   return {
     path: '/affiliated-groups/', crumbs: [['Affiliated Groups', '/affiliated-groups/']],
     title: 'Affiliated Groups | Al Waheed Group of Companies',
-    description: 'Al Waheed Group affiliated groups: Al Waheed Builders, HK Builders, Al Ghaffar Group, UMG, Mera Ghar and Rehaish. Authorized dealer for Falaknaz Group.',
+    description: 'Al Waheed Group affiliated groups and business partners: Al Waheed Builders, HK Builders, Al Ghaffar Group, UMG, JRB Group and Falaknaz Group.',
     body,
   };
 }
