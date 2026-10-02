@@ -100,10 +100,10 @@ export const companies = [
   {
     id: 'jrb-group',
     name: 'JRB Group of Companies',
-    sector: 'Real Estate & Construction',
+    sector: 'Real Estate, Building & Marketing',
     mark: 'jrb',
-    summary: 'A real estate and building group affiliated with Al Waheed Group, guiding buyers, sellers and investors on the journey from dreams to reality.',
-    services: ['Property sales and purchase', 'Building and construction', 'Investment advisory'],
+    summary: 'JRB stands for Jinnah Real Estate and Builders. The group works in real estate, building and real estate marketing, and its new project, Jinnah Comforts, is launching soon.',
+    services: ['Real estate sales and purchase', 'Building and construction', 'Real estate marketing', 'Jinnah Comforts, launching soon'],
   },
   // `partner: true` marks the business partners of Al Waheed Group
   {
