@@ -4,7 +4,7 @@
 export const site = {
   // Keep false while placeholder content (testimonials, some stats, jobs) is live.
   // false = every page gets noindex and robots.txt blocks crawling.
-  launchReady: false,
+  launchReady: true,
 
   name: 'Al Waheed Group of Companies',
   shortName: 'Al Waheed Group',

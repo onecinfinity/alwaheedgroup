@@ -1,3 +1,6 @@
-# Staging: placeholder content, keep out of search results until launch.
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /thank-you/
+Disallow: /_dev/
+
+Sitemap: https://alwaheedgroup.com/sitemap.xml
