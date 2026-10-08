@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Al Waheed Group",
+  "url": "https://alwaheedgroup.com/",
+  "logo": "https://alwaheedgroup.com/assets/img/brand/logo-horizontal.svg",
+  "email": "alwaheedgroupofcompanies@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "SB No. 2, United Palm Greens, Main 400 ft Wide Road, Scheme 43",
+    "addressLocality": "Karachi",
+    "addressCountry": "PK"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+92 306 0005559",
+    "contactType": "customer service",
+    "areaServed": "PK",
+    "availableLanguage": "en"
+  },
+  "sameAs": [
+    "https://www.facebook.com/share/1C6BQvyL7a/",
+    "https://www.instagram.com/alwaheedgroup/"
+  ]
+}

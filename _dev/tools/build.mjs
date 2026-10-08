@@ -6,7 +6,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { allPages } from '../src/pages.mjs';
-import { renderPage, abs, TODAY } from '../src/layout.mjs';
+import { renderPage, abs } from '../src/layout.mjs';
 import { site, projects, upcoming, chairman, board, downloads, companies } from '../src/data.mjs';
 
 const DEV = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -61,17 +61,13 @@ const live = new Set(pages.filter((p) => !p.file).map((p) => path.join(OUT, p.pa
 // Placeholder portrait (monogram card) used when a person has no photo
 write('assets/img/team/portrait-placeholder.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F7F2E8"/><stop offset="1" stop-color="#E8DDC8"/></linearGradient></defs><rect width="400" height="500" fill="url(#g)"/><rect x="18" y="18" width="364" height="464" fill="none" stroke="#AA8844" stroke-opacity=".35"/><circle cx="200" cy="250" r="96" fill="none" stroke="#AA8844" stroke-opacity=".5"/><circle cx="200" cy="250" r="104" fill="none" stroke="#AA8844" stroke-opacity=".2"/></svg>`);
 
-// Sitemap: indexable pages only
-const indexable = pages.filter((p) => !p.noindex && !p.file);
-write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${indexable.map((p) => `<url><loc>${abs(p.path)}</loc><lastmod>${TODAY}</lastmod><priority>${p.path === '/' ? '1.0' : p.path.startsWith('/projects/') ? '0.9' : '0.7'}</priority></url>`).join('\n')}
-</urlset>
+// Sitemap and robots.txt: the client's own files in src/static, copied as they are
+fs.copyFileSync(path.join(DEV, 'src/static/sitemap.xml'), path.join(OUT, 'sitemap.xml'));
+if (site.launchReady) fs.copyFileSync(path.join(DEV, 'src/static/robots.txt'), path.join(OUT, 'robots.txt'));
+else write('robots.txt', `# Staging: placeholder content, keep out of search results until launch.
+User-agent: *
+Disallow: /
 `);
-
-write('robots.txt', site.launchReady
-  ? `User-agent: *\nAllow: /\nDisallow: /thank-you/\nDisallow: /_dev/\n\nSitemap: ${abs('/sitemap.xml')}\n`
-  : `# Staging: placeholder content, keep out of search results until launch.\nUser-agent: *\nDisallow: /\n`);
 
 write('llms.txt', `# ${site.name}
 

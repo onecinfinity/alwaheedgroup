@@ -8,7 +8,7 @@ ErrorDocument 404 /404.html
   RewriteEngine On
   # Hostinger deploys the whole repository into public_html: keep build sources and repository files private
   RewriteRule ^(_dev|\.git|\.github|\.claude)(/|$) - [R=404,L]
-  RewriteRule ^(README\.md|\.gitignore|\.gitattributes)$ - [R=404,L]
+  RewriteRule ^(README\.md|CLAUDE\.md|\.gitignore|\.gitattributes)$ - [R=404,L]
   # One main address: https://alwaheedgroup.com (must match site.url in _dev/src/data.mjs).
   # The second domain and both www versions go there in a single permanent redirect, keeping the page path.
   RewriteCond %{HTTP_HOST} ^(www\.)?alwaheedgroupofcompanies\.com$ [NC,OR]

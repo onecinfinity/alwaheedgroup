@@ -341,60 +341,55 @@ export function mapFacade(query, label) {
 
 /* ---------- Structured data ---------- */
 
-const ORG = `${site.url}/#organization`;
-const WEBSITE = `${site.url}/#website`;
-
 export function postalAddress(street = site.address.street) {
   const a = site.address;
   return { '@type': 'PostalAddress', streetAddress: street, addressLocality: a.city, addressRegion: a.region, addressCountry: a.country };
 }
 
-function baseGraph() {
-  const org = {
-    '@type': 'Organization', '@id': ORG, name: site.name, alternateName: [site.shortName, site.brand], url: site.url + '/',
-    logo: { '@type': 'ImageObject', url: abs('/assets/img/brand/icon-512.png'), width: 512, height: 512 },
-    image: abs('/assets/img/og/home.jpg'), email: site.email, telephone: site.phone, foundingDate: String(site.foundingYear),
-    address: postalAddress(`${site.address.street}, ${site.address.detail}`),
-    contactPoint: { '@type': 'ContactPoint', telephone: site.phone, contactType: 'sales', areaServed: 'PK', availableLanguage: ['en', 'ur'] },
-    subOrganization: companies.filter((c) => c.sub).map((c) => ({ '@type': 'Organization', name: c.name })),
-  };
-  if (site.socialIsReal) org.sameAs = Object.values(site.social).filter(Boolean);
-  return [org, { '@type': 'WebSite', '@id': WEBSITE, url: site.url + '/', name: site.name, publisher: { '@id': ORG }, inLanguage: 'en-PK' }];
-}
-
-export function businessNode() {
-  return {
-    '@type': ['RealEstateAgent', 'HomeAndConstructionBusiness'], '@id': `${site.url}/#business`, name: site.name,
-    url: site.url + '/', image: abs('/assets/img/og/home.jpg'), logo: abs('/assets/img/brand/icon-512.png'),
-    telephone: site.phone, email: site.email, priceRange: 'PKR', address: postalAddress(`${site.address.street}, ${site.address.detail}`),
-    geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng },
-    openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: site.hours[0].dayOfWeek, opens: site.hours[0].open, closes: site.hours[0].close }],
-    areaServed: { '@type': 'City', name: 'Karachi' }, parentOrganization: { '@id': ORG },
-  };
-}
+// The client's own Organization, WebSite and LocalBusiness blocks (src/schema), each output as its own script tag
+const clientSchema = (name) => JSON.stringify(JSON.parse(fs.readFileSync(new URL(`./schema/${name}.json`, import.meta.url), 'utf8')));
+const SCHEMA = { organization: clientSchema('organization'), website: clientSchema('website'), localBusiness: clientSchema('local-business') };
 
 export function faqNode(url, faqs) {
   return { '@type': 'FAQPage', '@id': `${url}#faq`, mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 }
 
+// Breadcrumb trail of the page (same crumbs as the visible breadcrumb), none on pages without crumbs (home, thank you, 404)
+function breadcrumbSchema(page) {
+  if (page.path === '/' || !page.crumbs?.length) return '';
+  const crumbs = [['Home', '/'], ...(page.crumbs || [])];
+  return JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: crumbs.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, item: abs(href) })) });
+}
+
 function pageGraph(page) {
   const url = abs(page.path);
-  const graph = baseGraph();
-  const crumbs = [['Home', '/'], ...(page.crumbs || [])];
   const webpage = {
-    '@type': page.pageType || 'WebPage', '@id': `${url}#webpage`, url, name: page.title, description: page.description,
-    isPartOf: { '@id': WEBSITE }, about: { '@id': ORG }, inLanguage: 'en-PK',
+    '@type': page.pageType || 'WebPage', '@id': `${url}#webpage`, url, name: page.title, description: page.description, inLanguage: 'en-PK',
     primaryImageOfPage: { '@type': 'ImageObject', url: abs(page.ogImage || '/assets/img/og/home.jpg') },
   };
-  if (page.path !== '/') {
-    webpage.breadcrumb = { '@id': `${url}#breadcrumb` };
-    graph.push({ '@type': 'BreadcrumbList', '@id': `${url}#breadcrumb`, itemListElement: crumbs.map(([name, href], i) => ({ '@type': 'ListItem', position: i + 1, name, item: abs(href) })) });
-  }
-  graph.push(webpage, ...(page.schema || []));
-  return JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+  return JSON.stringify({ '@context': 'https://schema.org', '@graph': [webpage, ...(page.schema || [])] });
+}
+
+function schemaScripts(page) {
+  return [SCHEMA.organization, SCHEMA.website, page.localBusiness && SCHEMA.localBusiness, breadcrumbSchema(page), pageGraph(page)]
+    .filter(Boolean).map((j) => `<script type="application/ld+json">${j}</script>`).join('\n');
 }
 
 /* ---------- Document ---------- */
+
+// Google Search Console and Google Tag Manager, exactly as supplied by the client
+const GOOGLE_SITE_VERIFICATION = 'qS-xi8HfVWWIUeaaCOWsqIYwtOIpbMJSoXvmSdieWdE';
+const GTM_HEAD = `<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WMFVRQS4');</script>
+<!-- End Google Tag Manager -->`;
+const GTM_BODY = `<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMFVRQS4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->`;
 
 const FONTS = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap';
 
@@ -406,10 +401,12 @@ export function renderPage(page, { css, jsFile }) {
 <html lang="en-PK">
 <head>
 <meta charset="utf-8">
+${GTM_HEAD}
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
 <meta name="robots" content="${robots}">
+<meta name="google-site-verification" content="${GOOGLE_SITE_VERIFICATION}">
 <link rel="canonical" href="${url}">
 <meta name="theme-color" content="#17130F">
 <meta property="og:type" content="${page.ogType || 'website'}">
@@ -437,9 +434,10 @@ ${page.preload || ''}
 <noscript><link rel="stylesheet" href="${FONTS}"></noscript>
 <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.AW)document.documentElement.classList.remove('js')},3000)</script>
 <style>${css}</style>
-<script type="application/ld+json">${pageGraph(page)}</script>
+${schemaScripts(page)}
 </head>
 <body class="${page.bodyClass || 'has-hero'}">
+${GTM_BODY}
 ${header(page.path)}
 <main id="main">
 ${page.body}

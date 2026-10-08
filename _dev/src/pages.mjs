@@ -5,11 +5,10 @@ import {
 } from './data.mjs';
 import {
   pic, imgUrl, preloadImage, icon, esc, abs, tel, wa, btn, sectionHead, projectCard, soonCard, docCard, companyCard, companyMark,
-  personCard, quoteCard, portrait, statsBlock, faqList, consultForm, pageHero, ctaBand, mapFacade, businessNode, faqNode,
+  personCard, quoteCard, portrait, statsBlock, faqList, consultForm, pageHero, ctaBand, mapFacade, faqNode,
   postalAddress, TODAY, takeHeroImage,
 } from './layout.mjs';
 
-const ORG = `${site.url}/#organization`;
 const upg = projects[0];
 const kh = projects.find((x) => x.slug === 'khairunnisa-heights');
 const years = new Date().getFullYear() - site.foundingYear;
@@ -188,10 +187,11 @@ ${btn('/careers/', 'View Open Roles')}
 </section>`;
   return {
     path: '/',
-    title: 'Al Waheed Group | Builders and Developers in Karachi',
-    description: 'Al Waheed Group builds secure communities in Karachi. Explore United Palm Greens and Khairunnisa Heights and download their payment schedules.',
+    title: 'Al Waheed Group | Builders and Developers',
+    description: 'Al Waheed Group builds secure, modern communities. Explore United Palm Greens and Khairunnisa Heights and download their payment schedules.',
     preload: preloadImage('united-palm-greens/main'),
-    schema: [businessNode(), faqNode(abs('/'), homeFaqs)],
+    localBusiness: true,
+    schema: [faqNode(abs('/'), homeFaqs)],
     body,
   };
 }
@@ -250,8 +250,8 @@ ${sectionHead({ eyebrow: 'Leadership', title: 'Meet the People Behind Al Waheed'
 ${ctaBand()}`;
   return {
     path: '/about/', crumbs: [['About', '/about/']], pageType: 'AboutPage', ogImage: '/assets/img/og/about.jpg',
-    title: 'About Al Waheed Group of Companies | Karachi Real Estate',
-    description: 'Founded in 2016 by Abdul Waheed Meo, Al Waheed Group grew from a trusted real estate business into the developer of United Palm Greens in Karachi.',
+    title: 'About Al Waheed Group of Companies | Our Story',
+    description: 'Founded in 2016 by Abdul Waheed Meo, Al Waheed Group grew from a trusted real estate business into the developer of United Palm Greens.',
     body,
   };
 }
@@ -279,8 +279,8 @@ ${ctaBand()}`;
   return {
     path: '/chairman-message/', crumbs: [['About', '/about/'], ['Chairman\'s Message', '/chairman-message/']], ogType: 'article',
     title: 'Chairman\'s Message | Abdul Waheed Meo, Al Waheed Group',
-    description: 'A message from Abdul Waheed Meo, Chairman and Founder of Al Waheed Group, on trust, leadership and building better communities in Karachi.',
-    schema: [{ '@type': 'Person', '@id': `${site.url}/#chairman`, name: chairman.name, jobTitle: chairman.title, image: abs(imgUrl(chairman.photo, 720)), worksFor: { '@id': ORG } }],
+    description: 'A message from Abdul Waheed Meo, Chairman and Founder of Al Waheed Group, on trust, leadership and building better communities.',
+    schema: [{ '@type': 'Person', '@id': `${site.url}/#chairman`, name: chairman.name, jobTitle: chairman.title, image: abs(imgUrl(chairman.photo, 720)), worksFor: { '@type': 'Organization', name: site.shortName, url: site.url + '/' } }],
     body,
   };
 }
@@ -310,7 +310,7 @@ ${ctaBand()}`;
     path: '/board-of-directors/', crumbs: [['About', '/about/'], ['Board of Directors', '/board-of-directors/']],
     title: 'Board of Directors | Al Waheed Group of Companies',
     description: 'Meet the Al Waheed Group board: Chairman and Founder Abdul Waheed Meo, Director Operations Muhammad Saeed Meo and Director Sales Babar Majeed Meo.',
-    schema: board.map((p) => ({ '@type': 'Person', name: p.name, jobTitle: p.title, image: abs(imgUrl(p.photo, 720)), worksFor: { '@id': ORG } })),
+    schema: board.map((p) => ({ '@type': 'Person', name: p.name, jobTitle: p.title, image: abs(imgUrl(p.photo, 720)), worksFor: { '@type': 'Organization', name: site.shortName, url: site.url + '/' } })),
     body,
   };
 }
@@ -393,8 +393,8 @@ ${sectionHead({ eyebrow: 'Coming Soon', title: 'United Sky View, United Greens &
 ${ctaBand({ title: 'Not Sure Where to Invest?', text: 'Tell us your budget and plans. An advisor will walk you through United Palm Greens and arrange a site visit.' })}`;
   return {
     path: '/projects/', crumbs: [['Projects', '/projects/']], pageType: 'CollectionPage',
-    title: 'Real Estate Projects in Karachi | Al Waheed Group',
-    description: 'Explore Al Waheed Group projects in Karachi: United Palm Greens, Khairunnisa Heights apartments, and United Sky View, United Greens and United Lodges.',
+    title: 'Real Estate Projects | Al Waheed Group',
+    description: 'Explore Al Waheed Group projects: United Palm Greens, Khairunnisa Heights apartments, and United Sky View, United Greens and United Lodges.',
     schema: [{ '@type': 'ItemList', name: 'Al Waheed Group projects', itemListElement: projects.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(`/projects/${p.slug}/`), name: p.name })) }],
     body,
   };
@@ -535,8 +535,8 @@ ${sectionHead({ eyebrow: 'Coming Next', title: 'More From Al Waheed Group', id: 
   const docs = [d.paymentSchedule, d.layoutPlan].map((x) => ({ '@type': 'DigitalDocument', name: `${p.name} ${x.title}`, url: abs(x.file), encodingFormat: 'application/pdf', about: { '@id': `${url}#project` } }));
   return {
     path: `/projects/${p.slug}/`, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]],
-    title: 'United Palm Greens Karachi | Payment Plan & Layout Plan',
-    description: 'United Palm Greens by Al Waheed Group: a gated community in Scheme 43, Karachi. Booking from Rs. 600,000. Download the payment schedule and layout plan.',
+    title: 'United Palm Greens | Payment Plan & Layout Plan',
+    description: 'United Palm Greens by Al Waheed Group: a gated community in Scheme 43. Booking from Rs. 600,000. Download the payment schedule and layout plan.',
     ogImage: `/assets/img/og/${p.og}.jpg`, ogAlt: p.name,
     schema: [place, ...docs, faqNode(url, p.faqs)],
     body,
@@ -650,8 +650,8 @@ ${lightboxDialog}`;
   };
   return {
     path: `/projects/${p.slug}/`, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]],
-    title: 'Khairunnisa Heights, Scheme 33 Karachi | Apartments',
-    description: 'Khairunnisa Heights on Main Scheme 33 Road, Karachi: 4 and 5 room apartments by Al Ghaffar Group on 24 month installments. Floor plans and payment schedules.',
+    title: 'Khairunnisa Heights, Scheme 33 | Apartments',
+    description: 'Khairunnisa Heights on Main Scheme 33 Road: 4 and 5 room apartments by Al Ghaffar Group on 24 month installments. Floor plans and payment schedules.',
     ogImage: `/assets/img/og/${p.og}.jpg`, ogAlt: p.name,
     schema: [place, { '@type': 'DigitalDocument', name: `${p.name} ${d.title}`, url: abs(d.file), encodingFormat: 'application/pdf', about: { '@id': `${url}#project` } }, faqNode(url, p.faqs)],
     body,
@@ -703,8 +703,8 @@ ${sectionHead({ eyebrow: 'Apply Now', title: 'Send Your Application', sub: `Shar
   const valid = new Date(Date.now() + 60 * 864e5).toISOString().slice(0, 10);
   return {
     path: '/careers/', crumbs: [['Careers', '/careers/']], ogImage: '/assets/img/og/careers.jpg',
-    title: 'Careers at Al Waheed Group | Real Estate Jobs in Karachi',
-    description: 'Build your career with Al Waheed Group of Companies. View open roles in real estate sales, civil engineering, digital marketing and customer care in Karachi.',
+    title: 'Careers at Al Waheed Group | Real Estate Jobs',
+    description: 'Build your career with Al Waheed Group of Companies. View open roles in real estate sales, civil engineering, digital marketing and customer care.',
     schema: jobs.map((j) => ({
       '@type': 'JobPosting', title: j.title, description: `<p>${j.summary}</p><ul>${j.points.map((x) => `<li>${x}</li>`).join('')}</ul>`,
       datePosted: TODAY, validThrough: valid, employmentType: j.employmentType,
@@ -754,8 +754,9 @@ ${faqList(homeFaqs.slice(0, 5))}
   return {
     path: '/contact/', crumbs: [['Contact', '/contact/']], pageType: 'ContactPage',
     title: 'Contact Al Waheed Group | Book a Free Consultation',
-    description: 'Call or WhatsApp Al Waheed Group on +92 306 0005559, or visit us at United Palm Greens, Scheme 43, Karachi. Book a free consultation today.',
-    schema: [businessNode(), faqNode(abs('/contact/'), homeFaqs.slice(0, 5))],
+    description: 'Call or WhatsApp Al Waheed Group on +92 306 0005559, or visit us at United Palm Greens, Scheme 43. Book a free consultation today.',
+    localBusiness: true,
+    schema: [faqNode(abs('/contact/'), homeFaqs.slice(0, 5))],
     body,
   };
 }

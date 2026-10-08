@@ -2,7 +2,7 @@
 
 Everything needed to continue this project on any laptop, for a person or for Claude Code.
 Claude Code loads this file automatically when it is opened in the repository root.
-Last updated: 2026-10-06. Keep it current: when a client fact, rule or decision changes, update this file in the same commit.
+Last updated: 2026-10-08. Keep it current: when a client fact, rule or decision changes, update this file in the same commit.
 
 ---
 
@@ -15,6 +15,7 @@ Last updated: 2026-10-06. Keep it current: when a client fact, rule or decision 
 - **Repository:** https://github.com/onecinfinity/alwaheedgroup (branch `main`).
 - **Hosting:** Hostinger, Git deployment straight from GitHub `main` into `public_html`. A push to `main` goes live within about a minute.
 - **Forms:** Web3Forms (key not supplied yet).
+- **Tracking:** Google Tag Manager `GTM-WMFVRQS4` and the Google Search Console verification meta tag on every page (constants at the top of the Document section in `layout.mjs`).
 
 ---
 
@@ -60,7 +61,7 @@ node _dev/tools/audit.mjs
 git status
 ```
 - The build should print `Built 13 pages` and the audit `No problems found`.
-- After a build on a new day, only dates change: `sitemap.xml` (`lastmod`), the job posting dates in `careers/index.html` and the date in `privacy-policy/index.html` (all use the build date, in UTC). Anything else changing means the setup differs; investigate before committing.
+- After a build on a new day, only dates change: the job posting dates in `careers/index.html` and the date in `privacy-policy/index.html` (build date). `sitemap.xml` is the client's static file and does not change. Anything else changing means the setup differs; investigate before committing.
 - Line endings are normalised to LF by `.gitattributes`; binary files are marked binary.
 
 ### Preview locally
@@ -99,6 +100,8 @@ _dev/
   src/css/main.css        design system (inlined into every page at build)
   src/js/main.js          site behaviour (minified and hashed at build)
   src/static/.htaccess    source of the live .htaccess
+  src/static/robots.txt, sitemap.xml   the client's own files, copied as they are by the build
+  src/schema/*.json       the client's Organization, WebSite and LocalBusiness schema blocks
   src/images.json         image manifest written by images.py (keys -> sizes)
   tools/build.mjs         builds pages, sitemap, robots, llms.txt, manifest, .htaccess; dash guard
   tools/audit.mjs         checks the built site
@@ -117,7 +120,7 @@ _dev/
 
 | Command | When | What it does |
 | --- | --- | --- |
-| `node _dev/tools/build.mjs` | after any change in `_dev/src` | builds all pages into the root, inlines minified CSS, writes hashed JS, prunes deleted pages, writes sitemap, robots, llms.txt, manifest, copies .htaccess, fails on any em or en dash, warns on long titles or descriptions |
+| `node _dev/tools/build.mjs` | after any change in `_dev/src` | builds all pages into the root, inlines minified CSS, writes hashed JS, prunes deleted pages, copies the client's sitemap and robots, writes llms.txt and manifest, copies .htaccess, fails on any em or en dash, warns on long titles or descriptions |
 | `node _dev/tools/audit.mjs` | after every build | one h1 per page, unique titles and descriptions, alt text, broken links and srcset files, JSON-LD parse, duplicate ids, dead anchors, aria references; prints page sizes |
 | `python _dev/tools/images.py` | only when photos or logos change | regenerates every image and `images.json` (slow; a different Pillow version produces different bytes, so expect a large diff) |
 | `node _dev/tools/documents.mjs` | when the UPG payment plan, contacts or downloads change | prints the UPG payment schedule (A4) and layout plan (A3) PDFs, re-saves the Khairunnisa PDF, makes preview thumbnails; stops if payment rows do not add up to the total |
@@ -215,7 +218,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - Office: **SB No. 2, United Palm Greens, Main 400 ft Wide Road, Scheme 43, Survey No. 416, Deh Jam Chakro, Karachi, beside Silk Garden.**
 - Hours: **Saturday to Thursday, 11:00 AM to 7:00 PM. Friday closed.**
 - Facebook: https://www.facebook.com/share/1C6BQvyL7a/ . Instagram: https://www.instagram.com/alwaheedgroup/
-- Emails `info@alwaheedgroup.com` and `careers@alwaheedgroup.com` are PLACEHOLDERS until the client confirms.
+- Email: **alwaheedgroupofcompanies@gmail.com**, the only email used anywhere on the site (contact, footer, careers, schema, llms.txt). Confirmed 2026-10-08; the old `info@` and `careers@` placeholders are gone.
 
 ### Leadership
 - **Abdul Waheed Meo**, Chairman & Founder.
@@ -280,17 +283,22 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 
 ## 11. SEO and launch state
 
-- Every page: canonical, OG and Twitter tags, JSON-LD `@graph` (Organization, WebSite, WebPage, BreadcrumbList, RealEstateAgent / HomeAndConstructionBusiness, FAQPage, GatedResidenceCommunity or ApartmentComplex with Apartment units, Person, JobPosting, DigitalDocument).
-- Also generated: `sitemap.xml`, `robots.txt`, `llms.txt` (AI summary), `site.webmanifest`, OG images, favicons.
+- Every page: canonical, OG and Twitter tags, Search Console verification, GTM, and separate JSON-LD script tags:
+  - the client's **Organization** and **WebSite** blocks on every page, and **LocalBusiness** on home and contact (pages set `localBusiness: true`). Kept exactly as the client supplied them (only the email changed to the gmail); the client asked for them **not to be merged** into our graph. Name in them: "Al Waheed Group".
+  - a dynamic **BreadcrumbList** built from each page's `crumbs` (matches the visible breadcrumb); none on home, thank you and 404.
+  - a page `@graph`: WebPage plus page specific nodes (FAQPage, GatedResidenceCommunity or ApartmentComplex with Apartment units, Person, JobPosting, DigitalDocument).
+- **robots.txt and sitemap.xml are the client's own files** (`_dev/src/static/`), copied unchanged. The sitemap lists 10 pages with a fixed `lastmod` of 2026-10-05 and deliberately leaves out the privacy policy (client's decision). Add new pages to it by hand. With `launchReady: false` the build still writes a blocking robots.txt.
+- Also generated: `llms.txt` (AI summary), `site.webmanifest`, OG images, favicons.
+- **No "Karachi" in page titles or meta descriptions** (what shows when a link is shared), client request 2026-10-08. Addresses, on page text and schema addresses keep Karachi.
 - **Indexing:** `site.launchReady = true` since 2026-10-06 (client asked to remove noindex while some placeholders are still live). Setting it to `false` adds `noindex,nofollow` to every page and makes `robots.txt` disallow everything. `/thank-you/` and `404.html` stay noindex either way.
 
 ### Launch checklist
-1. Real email addresses (or remove them) and the **Web3Forms access key** (`site.web3formsKey`). Until then forms tell visitors to call or WhatsApp. The free plan has no file upload, so the careers form asks for a CV link.
+1. ~~Real email address~~ (done 2026-10-08) and the **Web3Forms access key** (`site.web3formsKey`). Until then forms tell visitors to call or WhatsApp. The free plan has no file upload, so the careers form asks for a CV link.
 2. Decide on the made up **testimonials**, **job openings** and the **"3,500+ Families Served"** stat (replace or remove).
 3. Real map coordinates (`site.geo`).
 4. Set `launchReady: true` (done 2026-10-06).
 5. Enable HSTS in `.htaccess` once SSL works on both domains.
-6. Submit `https://alwaheedgroup.com/sitemap.xml` in Google Search Console and Bing Webmaster Tools; Google Business Profile must use the exact same name, address and phone.
+6. Submit `https://alwaheedgroup.com/sitemap.xml` in Google Search Console (verification tag added 2026-10-08) and Bing Webmaster Tools; Google Business Profile must use the exact same name, address and phone.
 7. Run PageSpeed Insights on the live pages (mobile and desktop).
 
 ---
@@ -298,7 +306,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 ## 12. Open items
 
 **Waiting on the client**
-- Web3Forms key and email address ("will share later").
+- Web3Forms key.
 - Testimonials, jobs and the families served stat.
 - Renders for United Sky View, United Greens, United Lodges.
 - UPG plans for the 400 and 2,000 Sq. Yds plots.
@@ -325,6 +333,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - JRB Group of Companies = Jinnah Real Estate and Builders.
 - KH PDF typos left as they are (client said skip).
 - noindex removed on 2026-10-06 (`launchReady: true`) at the client's request, before the placeholders were replaced.
+- 2026-10-08: one email everywhere (alwaheedgroupofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions.
 
 ---
 
@@ -337,7 +346,9 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - **Company cards:** the grid uses flex with `height: auto` for equal height cards; the reveal script removes `data-reveal` after the transition so hover transforms work.
 - **Logo keying:** gold badge logos (`GOLD_LOGOS`) need ring trim and bottom cut values per logo; colour logos on white or paper are handled in `other_logos()` (JRB keeps the white inside its badge).
 - `images.py` deletes and rebuilds the generated image folders (`projects`, `united-palm-greens`, `khairunnisa-heights`, `soon`, `og`, `team`). Brand logos are overwritten in place; delete unused ones by hand.
-- `sitemap.xml` `lastmod`, the careers JobPosting dates and the privacy policy date come from the build date (UTC), so they change on every build day.
+- The careers JobPosting dates and the privacy policy date come from the build date, so they change on every build day. `sitemap.xml` does not (static client file).
+- `CLAUDE.md` must stay in the `.htaccess` 404 rule; it was publicly readable from 2026-10-06 until the 2026-10-08 push.
+- This laptop (2026-10-08) has no Python: preview with a small Node static server instead of `python -m http.server`, and install Python before running `images.py`.
 
 ---
 
