@@ -218,7 +218,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - Office: **SB No. 2, United Palm Greens, Main 400 ft Wide Road, Scheme 43, Survey No. 416, Deh Jam Chakro, Karachi, beside Silk Garden.**
 - Hours: **Saturday to Thursday, 11:00 AM to 7:00 PM. Friday closed.**
 - Facebook: https://www.facebook.com/share/1C6BQvyL7a/ . Instagram: https://www.instagram.com/alwaheedgroup/
-- Email: **alwaheedgroupofcompanies@gmail.com**, the only email used anywhere on the site (contact, footer, careers, schema, llms.txt). Confirmed 2026-10-08; the old `info@` and `careers@` placeholders are gone.
+- Email: **alwaheedgroupsofcompanies@gmail.com**, the only email used anywhere on the site (contact, footer, careers, schema, llms.txt). Confirmed 2026-10-08; the old `info@` and `careers@` placeholders are gone.
 
 ### Leadership
 - **Abdul Waheed Meo**, Chairman & Founder.
@@ -333,7 +333,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - JRB Group of Companies = Jinnah Real Estate and Builders.
 - KH PDF typos left as they are (client said skip).
 - noindex removed on 2026-10-06 (`launchReady: true`) at the client's request, before the placeholders were replaced.
-- 2026-10-08: one email everywhere (alwaheedgroupofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions.
+- 2026-10-08: one email everywhere (alwaheedgroupsofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions.
 
 ---
 

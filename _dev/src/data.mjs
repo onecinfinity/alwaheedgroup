@@ -17,8 +17,8 @@ export const site = {
   phoneHref: '+923060005559',
   whatsapp: '923060005559',
   whatsappText: 'Hi Al Waheed Group, I would like to know more about your projects.',
-  email: 'alwaheedgroupofcompanies@gmail.com',
-  careersEmail: 'alwaheedgroupofcompanies@gmail.com',
+  email: 'alwaheedgroupsofcompanies@gmail.com',
+  careersEmail: 'alwaheedgroupsofcompanies@gmail.com',
   address: {
     street: 'SB No. 2, United Palm Greens, Main 400 ft Wide Road, Scheme 43',
     detail: 'Survey No. 416, Deh Jam Chakro, beside Silk Garden',
