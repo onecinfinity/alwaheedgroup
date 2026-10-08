@@ -39,7 +39,7 @@ export const site = {
   },
   socialIsReal: true,
   storyVideoId: '', // YouTube video id for "Watch Our Story". Empty hides the button.
-  web3formsKey: 'YOUR_WEB3FORMS_ACCESS_KEY', // from https://web3forms.com
+  web3formsKey: '9e0fe863-5d5d-449d-94fc-8aaf3fbbf600', // from https://web3forms.com (public by design, it only lets forms send to the client's inbox)
 };
 
 export const stats = [

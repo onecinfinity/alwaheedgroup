@@ -14,7 +14,7 @@ Last updated: 2026-10-08. Keep it current: when a client fact, rule or decision 
 - **Live:** https://alwaheedgroup.com (indexable since 2026-10-06, see section 11).
 - **Repository:** https://github.com/onecinfinity/alwaheedgroup (branch `main`).
 - **Hosting:** Hostinger, Git deployment straight from GitHub `main` into `public_html`. A push to `main` goes live within about a minute.
-- **Forms:** Web3Forms (key not supplied yet).
+- **Forms:** Web3Forms, access key in `site.web3formsKey` (supplied 2026-10-08). Submissions go to the inbox the key was created with. The key is public by design (it sits in the HTML).
 - **Tracking:** Google Tag Manager `GTM-WMFVRQS4` and the Google Search Console verification meta tag on every page (constants at the top of the Document section in `layout.mjs`).
 
 ---
@@ -293,7 +293,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - **Indexing:** `site.launchReady = true` since 2026-10-06 (client asked to remove noindex while some placeholders are still live). Setting it to `false` adds `noindex,nofollow` to every page and makes `robots.txt` disallow everything. `/thank-you/` and `404.html` stay noindex either way.
 
 ### Launch checklist
-1. ~~Real email address~~ (done 2026-10-08) and the **Web3Forms access key** (`site.web3formsKey`). Until then forms tell visitors to call or WhatsApp. The free plan has no file upload, so the careers form asks for a CV link.
+1. Real email address and the **Web3Forms access key** (`site.web3formsKey`): both done 2026-10-08. The free plan has no file upload, so the careers form asks for a CV link.
 2. Decide on the made up **testimonials**, **job openings** and the **"3,500+ Families Served"** stat (replace or remove).
 3. Real map coordinates (`site.geo`).
 4. Set `launchReady: true` (done 2026-10-06).
@@ -306,7 +306,6 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 ## 12. Open items
 
 **Waiting on the client**
-- Web3Forms key.
 - Testimonials, jobs and the families served stat.
 - Renders for United Sky View, United Greens, United Lodges.
 - UPG plans for the 400 and 2,000 Sq. Yds plots.
@@ -333,7 +332,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - JRB Group of Companies = Jinnah Real Estate and Builders.
 - KH PDF typos left as they are (client said skip).
 - noindex removed on 2026-10-06 (`launchReady: true`) at the client's request, before the placeholders were replaced.
-- 2026-10-08: one email everywhere (alwaheedgroupsofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions.
+- 2026-10-08: one email everywhere (alwaheedgroupsofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions. Email corrected the same day to alwaheedgroup**s**ofcompanies@gmail.com. Web3Forms key added.
 
 ---
 
