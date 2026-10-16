@@ -170,7 +170,6 @@ def white_to_alpha(im):
 GOLD_LOGOS = {
     'hk-builders-logo': ('hk-builders.jpg', 0.82, (0.9, 1), None),
     'falaknaz-logo': ('falaknaz.jpg', 0.7, (0.9, 1), None),
-    'mera-ghar-rehaish-logo': ('mera-ghar-rehaish.jpg', 0.86, None, 0.797),
 }
 
 
@@ -208,7 +207,7 @@ def gold_logos():
 
 
 def other_logos():
-    """Al Ghafoor Group (colour logo on pale textured paper) and JRB Group (red badge and wordmark on white)."""
+    """Al Ghafoor Group (colour logo on pale textured paper), JRB Group (red badge and wordmark on white) and Abeera Properties (blue badge and wordmark on white)."""
     import cv2
     # Al Ghafoor: key out the paper and its faint watermark, keep the red, black and gold artwork
     img = np.asarray(Image.open(BRAND / 'partners' / 'al-ghafoor-group.jpg').convert('RGB')).astype(np.float32)
@@ -237,6 +236,27 @@ def other_logos():
     im.thumbnail((480, 300), Image.LANCZOS)
     im.save(OUT / 'brand' / 'jrb-logo.webp', 'WEBP', quality=92, method=6)
     print('logo jrb-logo', im.size)
+    # Abeera Properties: drop the Urdu tagline below the grey rule, clear the white card, keep the white inside the badge.
+    # First made on 2026-10-17 with the same steps in a browser canvas (no Python on that laptop); this code is untested.
+    img = np.asarray(Image.open(BRAND / 'partners' / 'abeera-properties.jpg').convert('RGB')).astype(np.float32)
+    grey = (np.ptp(img, axis=2) < 12) & (img[..., 0] > 120) & (img[..., 0] < 200)
+    rows = np.nonzero(grey.mean(axis=1) > 0.4)[0]
+    img = img[:rows[rows > img.shape[0] // 2].min() - 4]
+    blue = (np.abs(img - [133, 168, 213]) < 25).all(axis=2)  # the light blue disc locates the badge
+    ys, xs = np.nonzero(blue)
+    cy, cx, rad = ys.mean(), xs.mean(), np.sqrt(blue.sum() / np.pi)
+    a = np.clip((255 - img).max(axis=2) / 255, 0, 1)
+    a = np.where(a < 0.06, 0, a)
+    rgb = 255 - (255 - img) / np.maximum(a[..., None], 1e-3)
+    yy, xx = np.mgrid[0:a.shape[0], 0:a.shape[1]]
+    badge = np.hypot(yy - cy, xx - cx) < rad * 1.1
+    a = np.where(badge, 1, a)
+    rgb = np.where(badge[..., None], img, rgb)
+    im = Image.fromarray(np.dstack([np.clip(rgb, 0, 255), a * 255]).astype(np.uint8), 'RGBA')
+    im = im.crop(im.getbbox())
+    im.thumbnail((480, 300), Image.LANCZOS)
+    im.save(OUT / 'brand' / 'abeera-properties-logo.webp', 'WEBP', quality=92, method=6)
+    print('logo abeera-properties-logo', im.size)
 
 
 def partner_logos():

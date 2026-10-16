@@ -90,12 +90,12 @@ export const companies = [
   },
   // PLACEHOLDER descriptions and services for the groups below: confirm with the client
   {
-    id: 'mera-ghar-rehaish',
-    name: 'Mera Ghar Rehaish',
-    sector: 'Building & Marketing',
-    mark: 'meragharrehaish',
-    summary: 'A building and marketing company that turns a client\'s vision into a finished home, from construction through to sale.',
-    services: ['Building and construction', 'Property marketing', 'Client advisory'],
+    id: 'abeera-properties',
+    name: 'Abeera Properties',
+    sector: 'Real Estate',
+    mark: 'abeera',
+    summary: 'A real estate company helping families and investors buy, sell and invest in property since 2016, guided by its motto: your dream, our mission.',
+    services: ['Property sales and purchase', 'Investment advice', 'Documentation support'],
   },
   {
     id: 'jrb-group',

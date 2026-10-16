@@ -195,7 +195,7 @@ export function companyMark(c) {
     case 'alghafoor': return `<img class="mark__logo" src="/assets/img/brand/al-ghafoor-logo.webp" width="422" height="106" alt="" loading="lazy">`;
     case 'falaknaz': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/falaknaz-logo.webp" width="350" height="244" alt="" loading="lazy">`;
     case 'jrb': return `<img class="mark__logo" src="/assets/img/brand/jrb-logo.webp" width="480" height="214" alt="" loading="lazy">`;
-    case 'meragharrehaish': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/mera-ghar-rehaish-logo.webp" width="239" height="300" alt="" loading="lazy">`;
+    case 'abeera': return `<img class="mark__logo mark__logo--round" src="/assets/img/brand/abeera-properties-logo.webp" width="341" height="300" alt="" loading="lazy">`;
     default: return `<span class="mark mark--mono" aria-hidden="true">${c.name.split(' ').filter((w) => /^[A-Z]/.test(w)).slice(0, 2).map((w) => w[0]).join('')}</span>`;
   }
 }

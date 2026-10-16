@@ -2,7 +2,7 @@
 
 Everything needed to continue this project on any laptop, for a person or for Claude Code.
 Claude Code loads this file automatically when it is opened in the repository root.
-Last updated: 2026-10-08. Keep it current: when a client fact, rule or decision changes, update this file in the same commit.
+Last updated: 2026-10-17. Keep it current: when a client fact, rule or decision changes, update this file in the same commit.
 
 ---
 
@@ -231,7 +231,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 2. **HK Builders and Developers**, Construction & Development, https://www.hkbuildersanddevelopers.com/
 3. **Al Ghaffar Group**, Real Estate Development, developer of Khairunnisa Heights.
 4. **United Marketing Group (UMG)**, Sales & Marketing, part of the group, marketer of UPG.
-5. **Mera Ghar Rehaish**, Building & Marketing.
+5. **Abeera Properties**, Real Estate (replaced Mera Ghar Rehaish on 2026-10-17 at the client's request). Logo: blue round badge with "since 2016" and the Urdu motto "your dream, our mission"; the motto is cut off the web logo (unreadable at card size), like the Mera Ghar Rehaish tagline was.
 6. **JRB Group of Companies**, Real Estate, Building & Marketing. **JRB = Jinnah Real Estate and Builders.** They also do real estate marketing and are launching their own project **Jinnah Comforts** soon (mentioned only in the JRB profile, not as an Al Waheed upcoming project).
 7. **Falaknaz Group**, label **Business Partner** (partnership since 2023, continuing).
 8. **Al Ghafoor Group**, label **Business Partner** (partnership began 2022).
@@ -239,8 +239,8 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - Al Ghaffar Group and Al Ghafoor Group are **different** companies.
 - The name is **"Al Ghafoor Group"**, not "Al Ghafoor Builders & Developers".
 - Say **"business partner"**, never "authorized dealer" (the client corrected this on 2026-10-03).
-- Removed at the client's request: Jinnah Real Estate and Builders as a separate card (now shown as JRB), Mera Ghar, Rehaish, "Other Ventures". The section was renamed from "Our Companies" to **"Affiliated Groups"**.
-- Group descriptions and service lists for HK, Al Ghaffar, UMG, Mera Ghar Rehaish and the partners were written by us (marked PLACEHOLDER in data.mjs).
+- Removed at the client's request: Jinnah Real Estate and Builders as a separate card (now shown as JRB), Mera Ghar, Rehaish, Mera Ghar Rehaish (replaced by Abeera Properties), "Other Ventures". The section was renamed from "Our Companies" to **"Affiliated Groups"**.
+- Group descriptions and service lists for HK, Al Ghaffar, UMG, Abeera Properties and the partners were written by us (marked PLACEHOLDER in data.mjs).
 
 ### United Palm Greens (UPG), the group's own development
 - Developed by Al Waheed Builders & Developers, marketed by United Marketing Group. Launched 2026. Tagline "Live Green, Live United".
@@ -333,6 +333,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - KH PDF typos left as they are (client said skip).
 - noindex removed on 2026-10-06 (`launchReady: true`) at the client's request, before the placeholders were replaced.
 - 2026-10-08: one email everywhere (alwaheedgroupsofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions. Email corrected the same day to alwaheedgroup**s**ofcompanies@gmail.com. Web3Forms key added.
+- 2026-10-17: Mera Ghar Rehaish card replaced by Abeera Properties (client named both, same position).
 
 ---
 
@@ -347,6 +348,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - `images.py` deletes and rebuilds the generated image folders (`projects`, `united-palm-greens`, `khairunnisa-heights`, `soon`, `og`, `team`). Brand logos are overwritten in place; delete unused ones by hand.
 - The careers JobPosting dates and the privacy policy date come from the build date, so they change on every build day. `sitemap.xml` does not (static client file).
 - `CLAUDE.md` must stay in the `.htaccess` 404 rule; it was publicly readable from 2026-10-06 until the 2026-10-08 push.
+- **Abeera logo** (`assets/img/brand/abeera-properties-logo.webp`) was made in a browser canvas because this laptop has no Python. The matching block in `other_logos()` in `images.py` is untested; check its output against the committed file the first time it runs.
 - This laptop (2026-10-08) has no Python: preview with a small Node static server instead of `python -m http.server`, and install Python before running `images.py`.
 
 ---
