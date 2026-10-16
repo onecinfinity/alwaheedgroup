@@ -289,7 +289,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
   - a page `@graph`: WebPage plus page specific nodes (FAQPage, GatedResidenceCommunity or ApartmentComplex with Apartment units, Person, JobPosting, DigitalDocument).
 - **robots.txt and sitemap.xml are the client's own files** (`_dev/src/static/`), copied unchanged. The sitemap lists 10 pages with a fixed `lastmod` of 2026-10-05 and deliberately leaves out the privacy policy (client's decision). Add new pages to it by hand. With `launchReady: false` the build still writes a blocking robots.txt.
 - Also generated: `llms.txt` (AI summary), `site.webmanifest`, OG images, favicons.
-- **No "Karachi" in page titles or meta descriptions** (what shows when a link is shared), client request 2026-10-08. Addresses, on page text and schema addresses keep Karachi.
+- **No "Karachi" in page titles or meta descriptions** (what shows when a link is shared), client request 2026-10-08. Addresses, on page text and schema addresses keep Karachi. **Exception:** the UPG page title is "United Palm Greens Karachi | Payment Plan & Layout Plan" (client asked for it on 2026-10-17).
 - **Indexing:** `site.launchReady = true` since 2026-10-06 (client asked to remove noindex while some placeholders are still live). Setting it to `false` adds `noindex,nofollow` to every page and makes `robots.txt` disallow everything. `/thank-you/` and `404.html` stay noindex either way.
 
 ### Launch checklist
@@ -334,6 +334,7 @@ Navigation: Home, About (Our Story, Vision & Mission, Why Al Waheed, Chairman's 
 - noindex removed on 2026-10-06 (`launchReady: true`) at the client's request, before the placeholders were replaced.
 - 2026-10-08: one email everywhere (alwaheedgroupsofcompanies@gmail.com); client robots.txt and sitemap.xml used as supplied (privacy policy left out on purpose); client schema blocks kept separate, not merged; GTM and Search Console added; "Karachi" removed from titles and descriptions. Email corrected the same day to alwaheedgroup**s**ofcompanies@gmail.com. Web3Forms key added.
 - 2026-10-17: Mera Ghar Rehaish card replaced by Abeera Properties (client named both, same position).
+- 2026-10-17: UPG page title set to "United Palm Greens Karachi | Payment Plan & Layout Plan" at the client's request (the only title with Karachi).
 
 ---
 

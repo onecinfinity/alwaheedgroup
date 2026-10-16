@@ -535,7 +535,7 @@ ${sectionHead({ eyebrow: 'Coming Next', title: 'More From Al Waheed Group', id: 
   const docs = [d.paymentSchedule, d.layoutPlan].map((x) => ({ '@type': 'DigitalDocument', name: `${p.name} ${x.title}`, url: abs(x.file), encodingFormat: 'application/pdf', about: { '@id': `${url}#project` } }));
   return {
     path: `/projects/${p.slug}/`, crumbs: [['Projects', '/projects/'], [p.name, `/projects/${p.slug}/`]],
-    title: 'United Palm Greens | Payment Plan & Layout Plan',
+    title: 'United Palm Greens Karachi | Payment Plan & Layout Plan',
     description: 'United Palm Greens by Al Waheed Group: a gated community in Scheme 43. Booking from Rs. 600,000. Download the payment schedule and layout plan.',
     ogImage: `/assets/img/og/${p.og}.jpg`, ogAlt: p.name,
     schema: [place, ...docs, faqNode(url, p.faqs)],
