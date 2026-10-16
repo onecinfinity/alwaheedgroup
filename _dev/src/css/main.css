@@ -754,7 +754,7 @@ details[open] > summary .faq__icon { transform: rotate(45deg); }
 .footer__col a { font-size: .875rem; color: var(--stone); transition: color .2s; }
 .footer__col a:hover { color: var(--gold-deep); }
 .footer__contact address { display: grid; gap: 12px; }
-.footer__contact p { display: flex; gap: 10px; font-size: .875rem; }
+.footer__contact address p { display: flex; gap: 10px; font-size: .875rem; }
 .footer__contact .icon { margin-top: 3px; color: var(--gold-deep); }
 .footer__social { display: flex; gap: 10px; margin-top: 22px; }
 .footer__social a { display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid var(--line); border-radius: 50%; color: var(--ink); transition: background-color .25s, border-color .25s, color .25s; }

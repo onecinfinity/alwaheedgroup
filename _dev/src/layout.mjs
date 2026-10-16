@@ -121,19 +121,19 @@ function footer() {
 <p class="footer__about">A Karachi group of companies in real estate development, construction, marketing and investment, building trusted communities since ${site.foundingYear}.</p>
 </div>
 <div class="footer__col">
-<h2 class="footer__h">Quick Links</h2>
+<p class="footer__h">Quick Links</p>
 <ul><li><a href="/">Home</a></li><li><a href="/about/">About Us</a></li><li><a href="/chairman-message/">Chairman's Message</a></li><li><a href="/board-of-directors/">Board of Directors</a></li><li><a href="/careers/">Careers</a></li><li><a href="/contact/">Contact</a></li></ul>
 </div>
 <div class="footer__col">
-<h2 class="footer__h">Affiliated Groups</h2>
+<p class="footer__h">Affiliated Groups</p>
 <ul>${companies.map((c) => `<li><a href="/affiliated-groups/#${c.id}">${c.name}</a></li>`).join('')}</ul>
 </div>
 <div class="footer__col">
-<h2 class="footer__h">Projects</h2>
+<p class="footer__h">Projects</p>
 <ul>${projects.map((p) => `<li><a href="/projects/${p.slug}/">${p.name}</a></li>`).join('')}<li><a href="/projects/#upcoming">Upcoming Projects</a></li><li><a href="/projects/${projects[0].slug}/#payment-plan">Payment Schedules</a></li></ul>
 </div>
 <div class="footer__col footer__contact">
-<h2 class="footer__h">Contact Us</h2>
+<p class="footer__h">Contact Us</p>
 <address>
 <p>${icon('pin', '', 18)}<span>${a.street}, ${a.city}, ${a.countryName}</span></p>
 <p>${icon('phone', '', 18)}<a href="${tel}">${site.phone}</a></p>
